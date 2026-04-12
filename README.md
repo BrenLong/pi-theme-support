@@ -15,11 +15,11 @@ This repo is the live `~/.pi/agent/` directory. Changes made during Pi sessions 
 Theme Support work involves a lot of context-gathering:
 
 - Reading the ticket and full chat history
-- Checking the merchant's previous tickets
+- Searching the merchant's previous tickets to understand what's already been tried, what failed, and what their experience has been across multiple interactions
 - Identifying the theme type and determining scope
 - Searching for similar issues across Zendesk, GitHub, Slack, and internal docs
 - Investigating theme code
-- Drafting a response that follows team templates and tone guidelines
+- Drafting a response that accounts for all of this context and follows team templates and tone guidelines
 
 Most of this is research and synthesis — exactly the kind of work an AI agent can accelerate.
 
@@ -28,6 +28,8 @@ Most of this is research and synthesis — exactly the kind of work an AI agent 
 The workflow follows a three-phase model: **Intake → Investigate → Draft**.
 
 Each phase is a Pi skill that automates the research and presents findings for the advisor to review. The advisor still makes scope decisions, reviews all responses, and handles merchant communication.
+
+A key part of this workflow is **merchant history awareness**. Before any response is drafted, the system searches for the merchant's previous tickets to build a complete picture — what solutions were already offered, which ones failed, and how the merchant's experience has been so far. This prevents repeating information, avoids suggesting solutions that have already been tried, and ensures the response acknowledges the merchant's full journey.
 
 ## Development History
 
@@ -78,7 +80,7 @@ Exploring ways for Pi to access theme source code directly:
 
 | Skill | Phase | Description |
 |-------|-------|-------------|
-| `start-ticket` | Intake | Pull a Zendesk ticket, extract key info, auto-name the session, search for similar issues and context |
+| `start-ticket` | Intake | Pull a Zendesk ticket, extract key info, auto-name the session, search the merchant's previous tickets, and gather context from similar issues across tools |
 | `investigate-theme` | Investigate | Deep-dive research using shopify.dev, GitHub, past tickets, Scout, Vault, and Slack |
 | `draft-merchant-email` | Draft | Generate a response following team email templates, adapted to the merchant's tone |
 | `draft-scope-assessment` | Assess | Determine if a request is in or out of scope per Design Policy |
