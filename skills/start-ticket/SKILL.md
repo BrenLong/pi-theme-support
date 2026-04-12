@@ -32,11 +32,16 @@ Retrieve and analyze a Shopify Theme Support ticket to begin work.
    - Screenshots/videos mentioned
    - Any error messages
 
-3. **Auto-Name Session**
+3. **Auto-Name Session and Terminal Tab**
    - After extracting ticket info, immediately run `/name` to set the session name
    - Format: `[Store Name] - [Merchant Name] - Ticket #[number]`
    - Example: `/name Marcos Store - Marcos Andrade - Ticket #58893236`
    - This makes the session easy to find later with `pi -r` or `/resume`
+   - Also call the `set_terminal_title` tool to set the VS Code terminal tab title
+   - Format: `[store-handle] - [subject]`
+   - The store handle is the myshopify.com URL without `.myshopify.com` (e.g. `marcos-andrade`)
+   - The subject is a brief description of the issue
+   - Example: call `set_terminal_title` with title `marcos-andrade - Product images not displaying`
 
 4. **Gather Context**
    - Search Scout for similar merchant frustrations (last 90 days)
