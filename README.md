@@ -1,69 +1,138 @@
 # Pi Theme Support
 
-> ⚠️ **This is a work in progress.** This setup is being actively developed and tested. Things may change. Use at your own risk and adapt to your own workflow.
+> ⚠️ **Work in progress.** This setup is under active development and testing. Not everything described here has been fully validated in production. Use as inspiration and adapt to your own workflow.
 
-A [Pi](https://github.com/badlogic/pi-mono) coding agent setup tailored for Shopify Theme Support advisors. This configuration turns Pi into an AI-powered assistant for investigating theme issues, analyzing merchant tickets, and drafting responses.
+## What Is This?
 
-## What This Does
+A [Pi](https://github.com/badlogic/pi-mono) coding agent configuration for Shopify Theme Support advisors. The goal is to automate the repetitive parts of ticket work — pulling context, researching issues, drafting responses — while keeping the advisor in control of decisions and merchant communication.
 
-- **Pulls and analyzes Zendesk tickets** with full context (merchant history, similar issues, known bugs)
-- **Investigates theme code** by fetching live storefront HTML/CSS or querying theme files via the Admin API
-- **Searches across internal tools** — Slack, Vault, GitHub, Scout, Help Center — to find related issues and past solutions
-- **Drafts merchant emails** following Theme Support templates and tone guidelines
-- **Assesses scope** to quickly determine if a request is in or out of scope
-- **Prepares bug escalations** for the Horizon theme team
-- **Auto-names sessions** by store and merchant for easy retrieval when a merchant follows up
+This repo is the live `~/.pi/agent/` directory. Changes made during Pi sessions are tracked here automatically.
 
-## Quick Start
+## Background
 
-1. Install [Pi](https://github.com/badlogic/pi-mono)
-2. Copy the contents of this repo to `~/.pi/agent/`
-3. Ensure you have access to the required MCPs (support-core, scout, dev-mcp, vault, incidents)
-4. Run `pi` and start with `/skill:start-ticket <ticket-number>`
+### The Problem
+
+Theme Support work involves a lot of context-gathering:
+
+- Reading the ticket and full chat history
+- Checking the merchant's previous tickets
+- Identifying the theme type and determining scope
+- Searching for similar issues across Zendesk, GitHub, Slack, and internal docs
+- Investigating theme code
+- Drafting a response that follows team templates and tone guidelines
+
+Most of this is research and synthesis — exactly the kind of work an AI agent can accelerate.
+
+### The Approach
+
+The workflow follows a three-phase model: **Intake → Investigate → Draft**.
+
+Each phase is a Pi skill that automates the research and presents findings for the advisor to review. The advisor still makes scope decisions, reviews all responses, and handles merchant communication.
+
+## Development History
+
+### Phase 1: Initial Setup
+
+- Installed Pi and connected to Shopify's AI proxy
+- Set up Tool Gateway for access to internal MCP servers (Vault, Slack, Google Workspace, GitHub, Data Portal, Observe, and others)
+- Installed the `shop-pi-fy` community package for Shopify-specific extensions (scout, incidents, dev-mcp)
+
+### Phase 2: Building Missing Pieces
+
+Not everything worked out of the box:
+
+- **support-core MCP extension** — The Support Core MCP server (Zendesk tickets, Help Center) didn't have a ready-made Pi extension. Built a custom TypeScript extension from scratch, including MCP client setup, child process management, JSON-RPC communication, and Minerva/Okta authentication. Debugged uvx path resolution issues along the way.
+- **dev-mcp extension fix** — The dev-mcp extension failed because Shopify blocks `npx` globally. Patched the local copy to use `pnpx` instead.
+
+### Phase 3: Skills and Context
+
+- Created 5 workflow skills (see below)
+- Built a comprehensive AGENTS.md context file (~600 lines) covering scope rules, theme categorization, email templates, and decision trees
+- Added auto-session-naming to the start-ticket skill so sessions are easy to find when merchants follow up days later
+
+### Phase 4: Theme Code Access (Current)
+
+Exploring ways for Pi to access theme source code directly:
+
+- **Live storefront analysis** — Pi can fetch the public HTML/CSS from a merchant's storefront and reverse-engineer CSS/layout issues from the rendered output. Useful for quick triage but can't see Liquid source or merchant modifications. This works today.
+- **Admin GraphQL API** — The Admin API has a `theme.files` query that can read theme files directly. Validated the query, upgraded Shopify CLI from 3.84.1 → 3.93.2 to get the required `shopify store auth` / `shopify store execute` commands. Requires on-shift authentication to the merchant's store. **Not yet tested during a live shift.**
+
+### What's Working
+
+- Ticket intake with automatic context gathering across multiple tools
+- Session naming and resumption for multi-day ticket work
+- Investigation across Scout, Zendesk, GitHub, Vault, Slack, and shopify.dev
+- Email drafting following team templates
+- Scope assessment against Design Policy
+- Bug escalation preparation
+- Live storefront HTML/CSS analysis
+
+### What's Not Yet Validated
+
+- Direct theme file access via Admin API (needs on-shift auth test)
+- Full end-to-end workflow on a high volume of tickets
+- Edge cases in skill workflows
+- Team-wide adoption and feedback
+
+## Skills
+
+| Skill | Phase | Description |
+|-------|-------|-------------|
+| `start-ticket` | Intake | Pull a Zendesk ticket, extract key info, auto-name the session, search for similar issues and context |
+| `investigate-theme` | Investigate | Deep-dive research using shopify.dev, GitHub, past tickets, Scout, Vault, and Slack |
+| `draft-merchant-email` | Draft | Generate a response following team email templates, adapted to the merchant's tone |
+| `draft-scope-assessment` | Assess | Determine if a request is in or out of scope per Design Policy |
+| `escalate-theme-bug` | Escalate | Prepare a bug report with evidence, reproduction steps, and responsible team info |
 
 ## Structure
 
 ```
-├── AGENTS.md              # Core context: role, scope rules, email templates
-├── skills/                # Task-specific workflows
-│   ├── start-ticket/      # Pull and analyze a Zendesk ticket
-│   ├── investigate-theme/ # Deep-dive theme investigation
-│   ├── draft-merchant-email/  # Generate response emails
-│   ├── draft-scope-assessment/  # Quick scope check
-│   └── escalate-theme-bug/    # Prepare bug escalation
-├── extensions/            # MCP integrations and custom tools
-├── config/                # Pi configuration
-├── SETUP.md               # Installation and setup guide
-└── USAGE.md               # Daily workflow and commands
+├── AGENTS.md                  # Core context: role, scope rules, email templates
+├── README.md                  # This file
+├── SETUP.md                   # Installation notes
+├── USAGE.md                   # Daily workflow reference
+├── skills/
+│   ├── start-ticket/          # Ticket intake
+│   ├── investigate-theme/     # Issue research
+│   ├── draft-merchant-email/  # Response drafting
+│   ├── draft-scope-assessment/# Scope check
+│   └── escalate-theme-bug/    # Bug escalation
+├── extensions/
+│   ├── support-core/          # Custom-built: Zendesk + Help Center access
+│   ├── dev-mcp/               # Patched: shopify.dev docs + theme validation
+│   └── ...                    # Other extensions via Tool Gateway / shop-pi-fy
+├── config/                    # Pi configuration (credentials gitignored)
+└── sessions/                  # Conversation history (gitignored)
 ```
 
-## Skills
+## Tools Connected
 
-| Skill | Description |
-|-------|-------------|
-| `start-ticket` | Retrieve a ticket, extract key info, auto-name the session, gather context from Scout/Vault/GitHub |
-| `investigate-theme` | Comprehensive theme issue investigation using all available tools |
-| `draft-merchant-email` | Generate a professional response following Theme Support templates |
-| `draft-scope-assessment` | Quickly determine if a request is in or out of scope |
-| `escalate-theme-bug` | Prepare a bug escalation for engineering/product teams |
+**Via custom extensions:**
+- support-core — Zendesk ticket search, Help Center articles
 
-## Key Discoveries
+**Via Tool Gateway:**
+- Slack, Google Workspace, GitHub, Grokt (code search), Vault (internal docs), Observe (logs/errors), Data Portal, GCP Cloud Logging
 
-### Session Management
-Pi sessions auto-save and can be resumed with `pi -c` (last session) or `pi -r` (browse all). Naming sessions with `/name` makes it easy to find tickets when merchants follow up days later.
+**Via shop-pi-fy / MCP servers:**
+- Scout — merchant frustrations, support tickets, product feedback, app reviews, community posts, sales calls
+- Dev MCP — shopify.dev documentation, Liquid/GraphQL/component validation
+- Incidents — platform incident search and tracking
 
-### Theme Code Access
-Pi can investigate theme issues in two ways:
-1. **Reverse-engineering from the live storefront** — Fetching public HTML/CSS to identify layout bugs, CSS rules, and rendering issues
-2. **Direct API access** — Using Shopify CLI 3.93+ with `shopify store auth` + `shopify store execute` to query theme files via the Admin GraphQL API (read-only)
+## Shopify CLI Note
 
-### Shopify CLI
-The `shopify store` commands require CLI version 3.93.0+. If your system has an older version via Homebrew, install the latest via pnpm:
+The `shopify store` commands (for direct theme file API access) require CLI version 3.93.0+. If you have an older version installed via Homebrew, the pnpm-installed version lives at `~/.local/share/pnpm/shopify`.
+
 ```bash
+# Check version
+shopify version
+
+# Upgrade if needed
 pnpm install -g @shopify/cli@latest
+
+# New binary location
+~/.local/share/pnpm/shopify version
 ```
-The new binary installs to `~/.local/share/pnpm/shopify`.
 
 ## License
 
-This is a personal workflow setup shared for the benefit of other Shopify Theme Support advisors. Use and adapt freely.
+Shared for the benefit of other Shopify Theme Support advisors. Use and adapt freely.
