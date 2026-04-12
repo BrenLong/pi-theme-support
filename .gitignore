@@ -1,0 +1,18 @@
+# Sessions (private conversation history)
+sessions/
+
+# Credentials and auth
+auth.json
+config/incidents/credentials.json
+
+# Package migrations
+config/pkg/
+
+# Git submodules / cloned repos
+git/
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store

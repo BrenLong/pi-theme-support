@@ -1,0 +1,10 @@
+{
+  "npmCommand": [
+    "pnpm"
+  ],
+  "lastChangelogVersion": "0.66.1",
+  "packages": [
+    "git:github.com/shopify-playground/pi-tool-gateway-extension",
+    "git:github.com/shopify-playground/shop-pi-fy"
+  ]
+}
