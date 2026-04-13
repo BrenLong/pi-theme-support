@@ -165,3 +165,5 @@ Or provide context:
 - If complex issue, consider breaking into numbered steps
 - Remember: they might get a survey about this email
 - Screenshot references boost clarity
+- ALL links MUST use Markdown format: `[Link title](url)` — this applies to Help Center articles, screenshots, screen recordings, app contact pages, and any other URLs
+- When Brendan provides a screenshot or recording URL during investigation, include it directly in the email as a Markdown link — never leave it as a placeholder

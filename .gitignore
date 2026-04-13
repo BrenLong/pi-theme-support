@@ -14,5 +14,10 @@ git/
 # Node modules
 node_modules/
 
+# Machine-specific binaries and symlinks
+bin/
+extensions/chrome-devtools
+chrome-devtools.json
+
 # OS files
 .DS_Store

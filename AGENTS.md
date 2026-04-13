@@ -285,6 +285,15 @@ Is it checkout-related?
 ### CRITICAL: Template Usage
 The following templates are **starting frameworks, not rigid scripts**. Adapt the language, structure, and level of detail to fit each merchant's specific situation. Use the best, clearest language for the context — the templates show the general flow and key points to cover, not the exact wording to use every time.
 
+### CRITICAL: Links and Screenshots in Emails
+- ALL links in emails MUST use Markdown format: `[Link title](url)`
+- Examples:
+  - `[Design Policy](https://help.shopify.com/manual/online-store/themes/theme-support#shopify-design-policy)`
+  - `[Screenshot](https://screenshot.click/13-35-pyglu-31sji.jpg)`
+  - `[Shopify Partner](https://www.shopify.com/partners/directory)`
+- When Brendan provides a screenshot URL during investigation, it is intended to be included in the merchant email as a Markdown link — do NOT leave it as a placeholder or ask for confirmation
+- Apply this to ALL links: Help Center articles, screenshots, screen recordings, app contact pages, external resources, etc.
+
 ---
 
 ### First-Party Theme - Troubleshooting (In-Scope)
