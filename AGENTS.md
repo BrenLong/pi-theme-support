@@ -297,6 +297,13 @@ The following templates are **starting frameworks, not rigid scripts**. Adapt th
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
 
+### CRITICAL: Internal Notes (Zendesk)
+- After sending the first email on a ticket, Brendan may ask for an internal note - NEVER generate one proactively
+- After sending follow-up emails, Brendan may ask for an update section - NEVER generate one proactively
+- Only generate when explicitly asked (e.g. "write the internal note", "generate the note", "update the note")
+- Keep detail proportional to the ticket's complexity
+- See the draft-merchant-email skill for the full template and format
+
 ---
 
 ### First-Party Theme - Troubleshooting (In-Scope)

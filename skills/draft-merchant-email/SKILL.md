@@ -170,3 +170,54 @@ Or provide context:
 - ALWAYS write the final email to a .md file on the Desktop (e.g. `~/Desktop/ticket-{number}-reply.md`) so Brendan can open it in VS Code and copy-paste the raw Markdown cleanly into Zendesk - do NOT output the email inline in Pi, as both rendered Markdown and code blocks cause formatting issues when pasting
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
+
+## Internal Notes (Zendesk)
+
+After the first email on a ticket, Brendan may ask for an internal note. NEVER generate one proactively - only when explicitly asked (e.g. "write the internal note", "generate the note").
+
+Write the note to the same Desktop .md file as the email (append below), or a separate file if requested.
+
+### First Touch - Internal Note Template
+
+Use this template for the first response on a ticket. Keep detail proportional to the ticket's complexity - simple tickets get brief notes, complex tickets get more detail. Do not add extra sections or bullet points beyond this structure.
+
+```
+### TL;DR of Issue
+A quick, 1-2 sentence overview of the merchant's problem.
+
+### Investigation & Troubleshooting
+- Key step taken and result (3-6 bullets typical)
+- Focus on outcomes (what was tested, what worked/failed)
+
+### Relevant Links
+- Internal: [link]
+- Slack convo: [link]
+- Shared with Merchant: [link]
+- Dev/GitHub: [link]
+- Screen recordings/screenshots: [link]
+(Omit any that are not relevant)
+
+### Next Steps / Resolution
+Status: Solved | Blocked | Escalated | Waiting on Merchant | Waiting on Other Team
+(Delete statuses that are not relevant)
+
+Next step (if not solved): what's needed, who owns it, and by when.
+```
+
+Always include the final email text at the bottom of the internal note under a "Here's the final email I sent:" heading.
+
+### Follow-up Emails - Update Section
+
+For each subsequent email on the same ticket, Brendan may ask for an update to append to the existing internal note. NEVER generate one proactively.
+
+The update section should be:
+- Brief and concise
+- Bullet pointed
+- Appended below the existing note content
+- Formatted as:
+
+```
+### Update - [Date]
+- Brief bullet points summarising what was done/found/communicated
+- Status change if applicable
+```
