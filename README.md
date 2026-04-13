@@ -4,7 +4,7 @@
 
 ## What Is This?
 
-A [Pi](https://github.com/badlogic/pi-mono) coding agent configuration for Shopify Theme Support advisors. The goal is to automate the repetitive parts of ticket work — pulling context, researching issues, drafting responses — while keeping the advisor in control of decisions and merchant communication.
+A [Pi](https://github.com/badlogic/pi-mono) coding agent configuration for Shopify Theme Support specialists. The goal is to automate the repetitive parts of ticket work — pulling context, researching issues, drafting responses — while keeping the specialist in control of decisions and merchant communication.
 
 This repo is the live `~/.pi/agent/` directory. Changes made during Pi sessions are tracked here automatically.
 
@@ -27,7 +27,7 @@ Most of this is research and synthesis — exactly the kind of work an AI agent 
 
 The workflow follows a four-phase model: **Intake → Investigate → Draft → Close**.
 
-Each phase is a Pi skill that handles the work for that stage. The advisor still makes scope decisions, reviews all responses, and handles merchant communication.
+Each phase is a Pi skill that handles the work for that stage. The specialist still makes scope decisions, reviews all responses, and handles merchant communication.
 
 A key part of this workflow is **merchant history awareness**. Before any response is drafted, the system searches for the merchant's previous tickets to build a complete picture — what solutions were already offered, which ones failed, and how the merchant's experience has been so far. This prevents repeating information, avoids suggesting solutions that have already been tried, and ensures the response acknowledges the merchant's full journey.
 
@@ -144,4 +144,4 @@ pnpm install -g @shopify/cli@latest
 
 ## License
 
-Shared for the benefit of other Shopify Theme Support advisors. Use and adapt freely.
+Shared for the benefit of other Shopify Theme Support specialists. Use and adapt freely.

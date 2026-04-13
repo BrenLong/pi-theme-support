@@ -1,7 +1,7 @@
 # Shopify Theme Support Context
 
 ## My Role
-I'm Brendan, a Shopify Theme Support Advisor. I help merchants troubleshoot theme issues, analyze custom code issues, create custom solutions for first-party themes using Design Time, and determine if requests are in or out of scope.
+I'm Brendan, a Shopify Theme Support Specialist. I help merchants troubleshoot theme issues, analyze custom code issues, create custom solutions for first-party themes using Design Time, and determine if requests are in or out of scope.
 
 ## My Workflow
 1. Merchant submits ticket with theme issue/request via Zendesk
