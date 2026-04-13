@@ -77,6 +77,15 @@ Retrieve and analyze a Shopify Theme Support ticket to begin work.
 **MERCHANT'S STEPS TAKEN**
 - [what they already tried]
 
+**REPLICATION STEPS**
+Clear, numbered steps to reproduce and verify the issue. Build these from the merchant's description, chat transcript, and any advisor observations.
+1. [Step-by-step instructions to trigger the issue]
+2. [What to look for / expected vs actual behavior]
+3. [Any specific pages, devices, or conditions noted]
+
+- **Verification after fix:** [Quick steps to confirm the issue is resolved]
+- **Known non-factors:** [Things already ruled out, e.g. browser, device, network, cache]
+
 **RELATED CONTEXT**
 - Similar tickets: [list with ticket numbers]
 - Scout patterns: [merchant frustration trends]
