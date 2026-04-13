@@ -36,11 +36,21 @@ Generate a professional Theme Support email response following Brendan's templat
    - Add relevant Help Center links
    - Close with standard signature
 
-4. **Tone Calibration**
-   - Match merchant's communication style
-   - If frustrated: extra empathetic
+4. **Tone and Language (Shopify Style Guide)**
+   Follow Shopify's voice and tone guidelines:
+   - **Simple, common words** - avoid jargon, buzzwords, and overly complex language
+   - **Active voice** - "I've removed the code" not "the code was removed"
+   - **Confident, not uncertain** - "This resolves the issue" not "this might resolve the issue"
+   - **Supportive, not condescending** - don't over-explain or patronise
+   - **Positive and factual** - focus on what was done and what's working, not what went wrong
+   - **No negative-connotation words** - avoid words like "stressful", "worried", "frustrating", "unfortunately", "painful", "struggling". Use neutral or positive alternatives like "impactful", "I understand this affects..."
+   - **No apologies unless Shopify is clearly at fault** - do not apologise for third-party app issues, merchant code, or general inconvenience. Only apologise when it's been verified that Shopify (platform, theme, or staff) caused the problem. Saying "sorry" cheapens genuine apologies and implies fault where there is none.
+   - **Use contractions** - "I've", "don't", "you'll" for a friendly, natural tone
+   - **Keep sentences and paragraphs concise** - break up long blocks of text
+   - Match merchant's communication style and technical level
+   - If frustrated: extra empathetic but still factual
    - If technical: more detailed explanations
-   - If novice: simpler language
+   - If novice: simpler language, avoid jargon
    - Always friendly and professional
 
 5. **First-Touch Resolution**
