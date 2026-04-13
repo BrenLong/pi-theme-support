@@ -43,7 +43,16 @@ Generate a professional Theme Support email response following Brendan's templat
    - If novice: simpler language
    - Always friendly and professional
 
-5. **Survey Optimization**
+5. **First-Touch Resolution**
+   First-touch resolution is a key metric. Every email should be written to resolve the ticket in a single response, minimising the chance the merchant needs to reply.
+   - **Answer everything** - address every issue the merchant raised across the entire conversation, including secondary concerns. Don't leave loose threads.
+   - **Be definitive** - use confident language like "I've fixed this" or "I've removed the code." Avoid hedging like "this might help" or "you could try."
+   - **Don't ask direct questions** - never write "Could you let me know...?" or "Can you check...?" Instead, use conditional statements: "If you're still experiencing the issue, please let me know." This way they only reply if there's a problem.
+   - **Pre-empt follow-ups** - think about what the merchant is likely to ask next and answer it before they do. Cover edge cases and "what ifs" proactively.
+   - **Show your work** - include screenshots, screen recordings, and links that prove the fix is done. This builds trust and removes doubt, so they don't feel the need to reply to confirm.
+   - **Don't invite unnecessary responses** - avoid phrasing that prompts a reply (e.g. "Let me know your thoughts" or "What do you think?"). The goal is that if they do reply, it's just to say thanks.
+
+6. **Survey Optimization**
    - Remember: merchant may receive satisfaction survey
    - Write for positive response
    - Be thorough but not overwhelming
