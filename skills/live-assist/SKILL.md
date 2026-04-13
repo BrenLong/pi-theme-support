@@ -81,15 +81,21 @@ Format the output like this:
 
 #### Takeover Mode (when Brendan says he's taking over)
 
-Draft two things together:
+"Taking over" means Brendan is taking over the live chat itself - he connects directly with the merchant in the same chat session. The advisor stays in the chat but steps back. This is NOT an email handoff.
+
+Draft three things together:
 
 **To the advisor:**
 
-[Brief message letting them know what you're doing / what's happening]
+[Brief message letting them know Brendan is taking over the chat and they can step back]
+
+**Advisor response:**
+
+[A short message the advisor sends to the merchant introducing Brendan / letting them know the specialist is connecting directly]
 
 **To the merchant:**
 
-[Direct message from Brendan to the merchant - same professional/friendly tone guidelines as advisor responses]
+[Brendan's first direct message to the merchant in the chat - introduces himself, summarises the situation, explains next steps (e.g., deeper investigation needed, Design Time usage, follow-up via email if async work is required). Same professional/friendly tone guidelines as advisor responses]
 
 ---
 
@@ -127,9 +133,11 @@ Live Assist is a continuous conversation. As Brendan pastes follow-up messages o
 
 ## Output Format
 
-All messages are output inline (not written to files). Brendan copies directly from the Pi output.
-
-All messages should be formatted as Markdown so they render cleanly and copy well.
+- ALL draft messages (to advisor, advisor responses, to merchant) MUST be written to `~/Desktop/live-assist-messages.md` - never output inline in Pi as copy-pasting from Pi causes formatting issues (extra spaces/line breaks)
+- ALWAYS overwrite the same file with the latest messages
+- ALWAYS open the file automatically after writing it (`open ~/Desktop/live-assist-messages.md`)
+- Use plain text headers like `TO THE ADVISOR:`, `ADVISOR RESPONSE:`, `TO THE MERCHANT:` - no Markdown bold/formatting in headers
+- Briefings and analysis can still be output inline in Pi - only copy-pasteable messages go to the file
 
 ## Required MCPs
 - support-core (Help Center, Zendesk)
