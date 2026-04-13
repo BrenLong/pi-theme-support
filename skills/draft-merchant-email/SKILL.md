@@ -167,3 +167,4 @@ Or provide context:
 - Screenshot references boost clarity
 - ALL links MUST use Markdown format: `[Link title](url)` — this applies to Help Center articles, screenshots, screen recordings, app contact pages, and any other URLs
 - When Brendan provides a screenshot or recording URL during investigation, include it directly in the email as a Markdown link — never leave it as a placeholder
+- ALWAYS write the final email to a .md file on the Desktop (e.g. `~/Desktop/ticket-{number}-reply.md`) so Brendan can open it in VS Code and copy-paste the raw Markdown cleanly into Zendesk — do NOT output the email inline in Pi, as both rendered Markdown and code blocks cause formatting issues when pasting
