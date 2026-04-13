@@ -40,86 +40,51 @@
 
   document.body.appendChild(btn);
 
-  // --- Store Info Extraction (DOM selectors) ---
+  // --- Store Info Extraction (content-based search) ---
 
   function extractStoreInfo() {
     const lines = [];
+    const allLeafEls = document.querySelectorAll('*:not(:has(*))');
 
-    // Store URL - <a> with class "hover:underline" inside a link-colored span
-    const storeLinks = document.querySelectorAll('a.hover\\:underline');
-    for (const link of storeLinks) {
-      const text = link.textContent.trim();
-      if (text.match(/[\w-]+\.myshopify\.com/)) {
+    for (const el of allLeafEls) {
+      const text = el.textContent.trim();
+      if (!text || text.length > 200) continue;
+
+      // Store URL
+      if (!lines.some(l => l.startsWith('Store:')) && text.match(/^[\w-]+\.myshopify\.com$/)) {
         lines.push('Store: ' + text);
-        break;
       }
-    }
 
-    // Email - <div> with class "overflow-auto break-words" containing an email
-    const emailDivs = document.querySelectorAll('div.overflow-auto.break-words');
-    for (const div of emailDivs) {
-      const text = div.textContent.trim();
-      const match = text.match(/^[\w.+-]+@[\w.-]+\.\w{2,}$/);
-      if (match) {
-        lines.push('Email: ' + match[0]);
-        break;
+      // Email (exclude chat area)
+      if (!lines.some(l => l.startsWith('Email:')) && text.match(/^[\w.+-]+@[\w.-]+\.\w{2,}$/) && !el.closest('[class*="chat-message"]')) {
+        lines.push('Email: ' + text);
       }
-    }
 
-    // Plan - <span> with theme text classes containing plan name
-    const planSpans = document.querySelectorAll('span.text-base.font-normal');
-    for (const span of planSpans) {
-      const text = span.textContent.trim();
-      const match = text.match(/(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\([^)]*\)/i);
-      if (match) {
-        lines.push('Plan: ' + match[0]);
-        break;
+      // Plan
+      if (!lines.some(l => l.startsWith('Plan:'))) {
+        const planMatch = text.match(/^(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\([^)]*\)$/i);
+        if (planMatch) lines.push('Plan: ' + text);
       }
-    }
 
-    // Location - same span class, look for "City, Country" pattern after plan
-    let foundPlan = false;
-    for (const span of planSpans) {
-      const text = span.textContent.trim();
-      if (foundPlan) {
-        // Next text span after plan might be location
-        if (text.match(/,/) && !text.match(/design\s*time/i) && text.length < 80) {
-          lines.push('Location: ' + text);
-          break;
-        }
+      // Location - "City, Country" pattern
+      if (!lines.some(l => l.startsWith('Location:')) && text.match(/^[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\s*,\s*[A-Z][a-z]+(?:\s[A-Z][a-z]+)*$/) && text.length < 60) {
+        lines.push('Location: ' + text);
       }
-      if (text.match(/(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\(/i)) {
-        foundPlan = true;
-      }
-    }
 
-    // Account role
-    for (const span of planSpans) {
-      const text = span.textContent.trim();
-      if (text.match(/^(Account\s+owner|Staff\s+member|Collaborator)$/i)) {
+      // Account role
+      if (!lines.some(l => l.startsWith('Role:')) && text.match(/^(Account owner|Staff member|Collaborator)$/i)) {
         lines.push('Role: ' + text);
-        break;
       }
-    }
 
-    // Design time - <span> containing "minutes of design time used"
-    for (const span of planSpans) {
-      const text = span.textContent.trim();
-      const match = text.match(/(\d+)\s*minutes?\s*of\s*design\s*time\s*used/i);
-      if (match) {
-        lines.push('Design Time Used: ' + match[1] + ' minutes');
-        break;
+      // Design time
+      if (!lines.some(l => l.startsWith('Design Time'))) {
+        const dtMatch = text.match(/(\d+)\s*minutes?\s*of\s*design\s*time\s*used/i);
+        if (dtMatch) lines.push('Design Time Used: ' + dtMatch[1] + ' minutes');
       }
-    }
 
-    // Topic - <p> containing "Themes - ..."
-    const paragraphs = document.querySelectorAll('p');
-    for (const p of paragraphs) {
-      const text = p.textContent.trim();
-      const match = text.match(/Themes\s*[-–]\s*.+/i);
-      if (match) {
-        lines.push('Topic: ' + match[0]);
-        break;
+      // Topic
+      if (!lines.some(l => l.startsWith('Topic:')) && text.match(/^Themes\s*[-–]\s*.+/i)) {
+        lines.push('Topic: ' + text);
       }
     }
 
