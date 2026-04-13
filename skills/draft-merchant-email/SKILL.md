@@ -69,105 +69,22 @@ Generate a professional Theme Support email response following Brendan's templat
    - Show you understood their issue
    - Demonstrate effort and care
 
-## Output Format
+## Base Email Template
 
-**EMAIL DRAFT**
----
-Subject: [Clear subject line]
+All emails are built from this single template. The body and closing are adapted to the situation, tone, and context of the conversation.
 
-Hi [Merchant Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [brief restatement of issue].
-
-[Solution body - clear, step-by-step]
-
-[Any additional context or helpful links]
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
----
-
-**EMAIL TYPE:** [Solution/Out-of-Scope/Escalation/Workaround]
-
-**LINKS INCLUDED:**
-- [List any Help Center or doc links]
-
-**NOTES FOR REVIEW:**
-- [Anything to double-check before sending]
-
-## Email Templates
-
-### Solution Email (In-Scope)
+```
 Hi [Name],
 
 This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
 
-I've identified the issue - [root cause explanation].
+[Body - adapted to the situation]
 
-Here's how to fix this:
-
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-Once you've completed these steps, [expected outcome].
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
+[Closing - adapted to the tone and context of the conversation]
 
 Best regards,
 Brendan | Theme Support
-
-### Out-of-Scope Email
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that you'd like to [request summary].
-
-While I'd love to help, this falls outside the scope of Theme Support as it requires custom code modifications. Theme Support focuses on troubleshooting default theme functionality and helping you use built-in theme features.
-
-For custom development work like this, I'd recommend:
-
-1. Hiring a Shopify Partner: https://experts.shopify.com/
-2. Checking the Shopify App Store for apps that provide this functionality: https://apps.shopify.com/
-3. Exploring if your theme has built-in settings that achieve a similar result
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### Escalation Acknowledgment
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this issue and it appears to be [brief explanation]. I'm escalating this to our theme development team for further investigation.
-
-I'll keep you updated as I learn more. In the meantime, [any workaround if available].
-
-Thank you for your patience while we look into this.
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### Workaround Email
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've identified this as [root cause]. While this is [known bug/limitation], I can offer you a workaround in the meantime:
-
-[Workaround steps]
-
-Please note: [any limitations of workaround]
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
+```
 
 ## Examples
 

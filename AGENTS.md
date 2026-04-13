@@ -282,9 +282,6 @@ Is it checkout-related?
 - Provide exemplary customer service experience
 - Remember: Responses are measured via satisfaction surveys
 
-### CRITICAL: Template Usage
-The following templates are **starting frameworks, not rigid scripts**. Adapt the language, structure, and level of detail to fit each merchant's specific situation. Use the best, clearest language for the context — the templates show the general flow and key points to cover, not the exact wording to use every time.
-
 ### CRITICAL: Links and Screenshots in Emails
 - ALL links in emails MUST use Markdown format: `[Link title](url)`
 - Examples:
@@ -298,207 +295,27 @@ The following templates are **starting frameworks, not rigid scripts**. Adapt th
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
 
 ### CRITICAL: Internal Notes (Zendesk)
-- After sending the first email on a ticket, Brendan may ask for an internal note - NEVER generate one proactively
-- After sending follow-up emails, Brendan may ask for an update section - NEVER generate one proactively
-- Only generate when explicitly asked (e.g. "write the internal note", "generate the note", "update the note")
-- Keep detail proportional to the ticket's complexity
-- See the draft-merchant-email skill for the full template and format
+- Internal notes and Impact Tracker updates are handled by the close-ticket skill
+- See the close-ticket skill for templates and format
 
 ---
 
-### First-Party Theme - Troubleshooting (In-Scope)
+### Base Email Template
+
+All emails are built from this single template. The body and closing are adapted to the situation, tone, and context of the conversation. Refer to the draft-merchant-email skill for detailed tone, style, and first-touch resolution guidelines.
+
+```
 Hi [Name],
 
 This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
 
-[Investigation findings and solution]
+[Body - adapted to the situation]
 
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### First-Party Theme - Custom Code Issue (Duplicate Theme Recommended)
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this and found that the issue is being caused by custom code in [file name]. Specifically, [explanation of what the code is doing wrong].
-
-To confirm this isn't a theme bug, I've created a duplicate of your theme with this custom code removed, and the issue doesn't occur there.
-
-[If recommending duplicate:]
-I'd recommend using the duplicate theme, as the custom code that was causing the issue doesn't appear to be providing any other functionality on your store.
-
-[OR if NOT recommending duplicate:]
-However, I don't recommend using the duplicate theme because removing this custom code would also remove [other functionality that would be lost], which appears to be in use on your store.
-
-You'll need to get in touch with the developer who added this code to have them fix it. If you don't have a developer, I'd recommend hiring an external developer like a Shopify Partner: https://www.shopify.com/partners/directory
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
+[Closing - adapted to the tone and context of the conversation]
 
 Best regards,
 Brendan | Theme Support
-
-### First-Party Theme - AI-Generated Code Issue
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this and found that the issue is being caused by an AI-generated theme block created with Shopify Magic. Unfortunately, we're unable to provide support for AI-generated blocks, as outlined in our limitations documentation.
-
-For assistance with this, I'd recommend hiring an external developer like a Shopify Partner: https://www.shopify.com/partners/directory
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### First-Party Theme - Customization Completed
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that you'd like to [customization request].
-
-[Completed customization details and explanation]
-
-A reminder that this customization used [15/30/60] minutes of your complimentary Design Time and you now have [XX] minutes remaining.
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### First-Party Theme - Customization Too Complex
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that you'd like to [request].
-
-While I'd love to help, this customization is overly complex. [Specific explanation of why it's too complex - e.g., "This would require modifying multiple interconnected theme sections and creating custom JavaScript functionality, which goes beyond what we can support with your complimentary [Design Time](https://help.shopify.com/manual/online-store/themes/theme-support#shopify-design-policy)
-."]
-
-For this type of work, I'd recommend hiring an external developer like a Shopify Partner: https://www.shopify.com/partners/directory
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### First-Party Theme - Customization Violates Design Policy
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that you'd like to [request].
-
-While I'd love to help, this customization [would require modifying custom code / falls outside our [Design Policy](https://help.shopify.com/manual/online-store/themes/theme-support#shopify-design-policy)]. [Specific explanation of which policy limitation applies]
-
-For this type of work, I'd recommend hiring an external developer like a Shopify Partner: https://www.shopify.com/partners/directory
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### Third-Party Theme (Theme Store) - Troubleshooting Bug
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this issue and found that it's a bug with the theme itself. Since [Theme Name] is a third-party theme, you'll need to contact the theme developer for support with this issue. You can access their support:
-
-1. Go to Online Store > Themes
-2. Click Edit theme on [Theme Name]
-3. Click the theme name at the top
-4. Click "Get support"
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### Third-Party Theme (Theme Store) - Troubleshooting Custom Code
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this issue and found that it's being caused by custom code you've added to [file name]. You'll need to contact the developer who added this code to have them fix it.
-
-If you don't have a developer, I'd recommend hiring an external developer like a Shopify Partner: https://www.shopify.com/partners/directory
-
-Please note that theme developers also do not provide support for custom code modifications.
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### Third-Party Theme (Theme Store) - Customization Request
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that you'd like to [customization request].
-
-Since you're using [Theme Name], which is a third-party theme, I'm unable to provide customizations. We lack the specific context needed to work on third-party themes safely, and this type of request is not supported under our [Design Policy](https://help.shopify.com/manual/online-store/themes/theme-support#shopify-design-policy).
-
-For customization work, I'd recommend hiring an external developer like a Shopify Partner: https://www.shopify.com/partners/directory
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### Third-Party Theme (NOT Theme Store)
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue/request].
-
-I can see you're using [Theme Name], which is not available on the Shopify Theme Store. As outlined in our [Design Policy](https://help.shopify.com/manual/online-store/themes/theme-support#shopify-design-policy), Shopify Theme Support is only able to assist with themes available on the Theme Store.
-
-I'd recommend:
-
-1. Contacting the original theme developer (wherever you purchased or downloaded the theme)
-2. Hiring an external developer like a Shopify Partner for assistance: https://www.shopify.com/partners/directory
-3. Switching to a supported theme from the Shopify Theme Store: https://themes.shopify.com/
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### App Issue (Any Theme - Third-Party App)
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this and found that the issue is being caused by [App Name]. Even though you're using a [first-party/third-party] theme, app-related issues are the app developer's responsibility to resolve, as it's their responsibility to ensure their app works with themes.
-
-You can contact the app developer for support:
-
-1. Go to Settings > Apps in your admin
-2. Find [App Name]
-3. Look for support options within the app's settings
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
-
-### App Issue (Third-Party App + Third-Party Theme)
-Hi [Name],
-
-This is Brendan from Shopify Theme Support. It's a pleasure to be in touch with you today. I understand that [issue summary].
-
-I've investigated this and found that the issue is being caused by [App Name]. Since you're using a third-party theme, you'll need to contact the app developer first to check if their app is compatible with [Theme Name].
-
-You can contact the app developer for support:
-
-1. Go to Settings > Apps in your admin
-2. Find [App Name]
-3. Look for support options within the app's settings
-
-If the app developer indicates their app isn't compatible with your theme, you can contact the theme developer or hire an external developer like a Shopify Partner for assistance: https://www.shopify.com/partners/directory
-
-If I can clarify anything above please let me know. Thanks for getting in touch!
-
-Best regards,
-Brendan | Theme Support
+```
 
 ---
 
