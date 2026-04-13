@@ -196,7 +196,7 @@ Or provide context:
 
 After the first email on a ticket, Brendan may ask for an internal note. NEVER generate one proactively - only when explicitly asked (e.g. "write the internal note", "generate the note").
 
-Write the note to the same Desktop .md file as the email (append below), or a separate file if requested.
+ALWAYS write the internal note to a separate file from the email (e.g. `~/Desktop/ticket-{number}-internal-note.md`). Never append it to the email file.
 
 ### First Touch - Internal Note Template
 
