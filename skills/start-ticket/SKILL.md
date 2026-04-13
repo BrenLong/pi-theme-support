@@ -43,11 +43,12 @@ Retrieve and analyze a Shopify Theme Support ticket to begin work.
    - The subject is a brief description of the issue
    - Example: call `set_terminal_title` with title `marcos-andrade - Product images not displaying`
 
-4. **Gather Context**
-   - Search Scout for similar merchant frustrations (last 90 days)
-   - Search Zendesk for similar resolved tickets
-   - Search Vault for team documentation on this issue type
-   - Check dev-mcp for known theme bugs/issues
+4. **Gather Context (as needed)**
+   Context searches are optional and should be done when they'd add value, not on every ticket. Use judgement based on the issue type:
+   - **Widespread/recurring issues:** Search Scout for merchant frustration patterns and Zendesk for similar resolved tickets
+   - **Suspected theme bugs:** Search dev-mcp/GitHub for known issues
+   - **Unfamiliar issues:** Search Vault for team documentation and past solutions
+   - **Simple/clear-cut issues:** Skip context gathering and move straight to investigation
 
 5. **Initial Assessment**
    - Categorize issue type:

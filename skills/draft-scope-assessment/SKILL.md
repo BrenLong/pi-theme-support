@@ -12,66 +12,37 @@ Quickly determine if a merchant request is within Theme Support scope.
 - Before spending time investigating
 - When deciding how to route a ticket
 
-## Required MCPs
-- support-core (Help Center scope guidelines)
-- dev-mcp (check if feature exists in theme)
-
 ## Scope Guidelines Reference
 
-### IN SCOPE
-- Default theme functionality bugs
-- Theme settings configuration help
-- Understanding how theme features work
-- Troubleshooting standard theme behavior
-- Theme editor issues
-- Liquid syntax errors in default code
-- CSS/styling issues in default code
-- Section/block configuration
-- Theme updates and compatibility
+Refer to the detailed scope decision tree, theme categories, and support levels in AGENTS.md. Do not duplicate those rules here.
 
-### OUT OF SCOPE
-- Custom code modifications
-- Adding new features via code
-- Performance optimization (advanced)
-- Third-party app integration code
-- Custom functionality requests
-- Advanced customizations beyond settings
-- Building new sections/blocks
-- Complex Liquid programming
-- JavaScript custom development
-
-### GRAY AREA (Needs Assessment)
-- Minor CSS tweaks (might be settings-based)
-- Liquid code explanations (education vs. building)
-- App conflicts (could be theme bug)
-- Performance issues (could be theme bug vs. optimization)
+Key points:
+- Always identify the theme type first (first-party, third-party Theme Store, third-party not on Theme Store)
+- Theme type determines the entire scope
+- For first-party themes, determine if it's troubleshooting or customisation
+- Check for custom code and significant code changes
+- Check AGENTS.md for the full decision tree
 
 ## Process
 
 1. **Understand Request**
-   - What is merchant trying to achieve?
-   - Is it modifying existing behavior or adding new?
+   - What is the merchant trying to achieve?
+   - Is it modifying existing behaviour or adding new?
    - Can it be done with theme settings?
 
-2. **Check Theme Capabilities**
-   - Search dev-mcp for theme documentation
-   - Check if theme has built-in setting for this
-   - Look for similar feature requests
+2. **Identify Theme Type**
+   - Follow the scope decision tree in AGENTS.md
+   - Theme type determines everything else
 
-3. **Apply Scope Guidelines**
-   - Does it require code changes?
-   - Is it troubleshooting vs. building?
-   - Is it understanding vs. implementing?
+3. **Check Theme Capabilities**
+   - Search dev-mcp for theme documentation if needed
+   - Check if theme has a built-in setting for this
+   - Browse the theme editor to verify
 
-4. **Search Help Center**
-   - Find relevant scope guidance articles
-   - Find alternative solutions articles
-   - Get Partner referral links
-
-5. **Make Decision**
+4. **Make Decision**
    - Clear in/out determination
-   - Reasoning for decision
-   - Alternative suggestions if out
+   - Reasoning based on AGENTS.md guidelines
+   - Alternative suggestions if out of scope
 
 ## Output Format
 
@@ -82,11 +53,10 @@ Request: [What merchant wants to do]
 **DETERMINATION:** [IN SCOPE / OUT OF SCOPE / NEEDS INVESTIGATION]
 
 **REASONING:**
-[Explain why this falls in or out of scope]
+[Explain why this falls in or out of scope, referencing the relevant AGENTS.md guideline]
 
 **THEME CAPABILITIES CHECK:**
 [Can their theme already do this with settings?]
-- [Yes/No with explanation]
 
 **ALTERNATIVE SOLUTIONS:**
 1. [Settings-based approach if exists]
@@ -96,10 +66,6 @@ Request: [What merchant wants to do]
 **RECOMMENDED RESPONSE:**
 [How to communicate this to merchant]
 
-**HELP CENTER REFERENCES:**
-- [Relevant articles about scope]
-- [Relevant articles about features]
-
 ## Examples
 
 ### Example: Product Cards Open in New Tab
@@ -107,40 +73,21 @@ Request: "Make product card images and titles open in new tab"
 
 DETERMINATION: OUT OF SCOPE
 
-REASONING:
-- Requires modifying theme code (add target="_blank")
-- Not a bug - this is a feature request
-- Not available via theme settings
-- Requires custom development
+REASONING: Requires modifying theme code (add target="_blank"). Not a bug - this is a feature request. Not available via theme settings. Requires custom development.
 
 ALTERNATIVE SOLUTIONS:
 1. No settings-based solution exists in Dawn
-2. No app specifically for this functionality
-3. Shopify Partner can add this via code customization
-
-RECOMMENDED RESPONSE:
-Out-of-scope email with Partner referral
+2. Shopify Partner can add this via code customisation
 
 ### Example: Images Not Displaying
 Request: "Featured Collection images aren't showing"
 
 DETERMINATION: IN SCOPE
 
-REASONING:
-- Troubleshooting default functionality
-- Images should display - this is a bug
-- Not adding new features, fixing existing
-- Within Theme Support expertise
-
-THEME CAPABILITIES CHECK:
-Images should display by default in Featured Collection section.
-
-RECOMMENDED RESPONSE:
-Investigate → Find root cause → Provide fix
+REASONING: Troubleshooting default functionality. Images should display - this is a potential bug. Not adding new features, fixing existing.
 
 ## Notes
-- When in doubt, lean toward OUT OF SCOPE
-- Better to route correctly than investigate unnecessarily
-- Always offer alternatives for out-of-scope
-- If gray area, quick investigation to clarify
+- When in doubt, lean toward investigating before ruling out of scope
+- Always offer alternatives for out-of-scope requests
 - Partner referrals are not a failure - they're proper routing
+- Reference AGENTS.md for any scope edge cases
