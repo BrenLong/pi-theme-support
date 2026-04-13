@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Beacon Chat Extractor
 // @namespace    https://github.com/BrenLong/pi-theme-support
-// @version      0.2.0
+// @version      0.3.0
 // @description  Extract Beacon Live Assist chat transcripts for Pi
 // @match        https://beacon.shopify.io/*
 // @grant        GM_setClipboard
@@ -40,40 +40,88 @@
 
   document.body.appendChild(btn);
 
-  // --- Sidebar / Store Info Extraction ---
+  // --- Store Info Extraction (DOM selectors) ---
 
   function extractStoreInfo() {
-    const body = document.body.innerText;
     const lines = [];
 
-    // Store URL
-    const storeMatch = body.match(/[\w-]+\.myshopify\.com/);
-    if (storeMatch) lines.push('Store: ' + storeMatch[0]);
+    // Store URL - <a> with class "hover:underline" inside a link-colored span
+    const storeLinks = document.querySelectorAll('a.hover\\:underline');
+    for (const link of storeLinks) {
+      const text = link.textContent.trim();
+      if (text.match(/[\w-]+\.myshopify\.com/)) {
+        lines.push('Store: ' + text);
+        break;
+      }
+    }
 
-    // Email
-    const emailMatch = body.match(/[\w.+-]+@[\w.-]+\.\w{2,}/);
-    if (emailMatch) lines.push('Email: ' + emailMatch[0]);
+    // Email - <div> with class "overflow-auto break-words" containing an email
+    const emailDivs = document.querySelectorAll('div.overflow-auto.break-words');
+    for (const div of emailDivs) {
+      const text = div.textContent.trim();
+      const match = text.match(/^[\w.+-]+@[\w.-]+\.\w{2,}$/);
+      if (match) {
+        lines.push('Email: ' + match[0]);
+        break;
+      }
+    }
 
-    // Plan - current Shopify plan names
-    const planMatch = body.match(/(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\([^)]*\)/i);
-    if (planMatch) lines.push('Plan: ' + planMatch[0]);
+    // Plan - <span> with theme text classes containing plan name
+    const planSpans = document.querySelectorAll('span.text-base.font-normal');
+    for (const span of planSpans) {
+      const text = span.textContent.trim();
+      const match = text.match(/(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\([^)]*\)/i);
+      if (match) {
+        lines.push('Plan: ' + match[0]);
+        break;
+      }
+    }
 
-    // Location - look for city/country patterns near plan info
-    // Beacon shows "City, Country" in the details panel
-    const locationMatch = body.match(/(?:Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\([^)]*\)\s*\n?\s*([A-Z][a-z]+(?:\s[A-Z][a-z]+)*\s*,\s*[A-Z][a-z]+(?:\s[A-Z][a-z]+)*)/i);
-    if (locationMatch) lines.push('Location: ' + locationMatch[1].trim());
+    // Location - same span class, look for "City, Country" pattern after plan
+    let foundPlan = false;
+    for (const span of planSpans) {
+      const text = span.textContent.trim();
+      if (foundPlan) {
+        // Next text span after plan might be location
+        if (text.match(/,/) && !text.match(/design\s*time/i) && text.length < 80) {
+          lines.push('Location: ' + text);
+          break;
+        }
+      }
+      if (text.match(/(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\(/i)) {
+        foundPlan = true;
+      }
+    }
 
     // Account role
-    const roleMatch = body.match(/Account\s+owner|Staff\s+member|Collaborator/i);
-    if (roleMatch) lines.push('Role: ' + roleMatch[0]);
+    for (const span of planSpans) {
+      const text = span.textContent.trim();
+      if (text.match(/^(Account\s+owner|Staff\s+member|Collaborator)$/i)) {
+        lines.push('Role: ' + text);
+        break;
+      }
+    }
 
-    // Design time
-    const dtMatch = body.match(/(\d+)\s*minutes?\s*of\s*design\s*time\s*used/i);
-    if (dtMatch) lines.push('Design Time Used: ' + dtMatch[1] + ' minutes');
+    // Design time - <span> containing "minutes of design time used"
+    for (const span of planSpans) {
+      const text = span.textContent.trim();
+      const match = text.match(/(\d+)\s*minutes?\s*of\s*design\s*time\s*used/i);
+      if (match) {
+        lines.push('Design Time Used: ' + match[1] + ' minutes');
+        break;
+      }
+    }
 
-    // Topic
-    const topicMatch = body.match(/Topic\s*\n?\s*(Themes\s*[-–]\s*[^\n]+)/i);
-    if (topicMatch) lines.push('Topic: ' + topicMatch[1].trim());
+    // Topic - <p> containing "Themes - ..."
+    const paragraphs = document.querySelectorAll('p');
+    for (const p of paragraphs) {
+      const text = p.textContent.trim();
+      const match = text.match(/Themes\s*[-–]\s*.+/i);
+      if (match) {
+        lines.push('Topic: ' + match[0]);
+        break;
+      }
+    }
 
     return lines.length > 0 ? lines.join('\n') : null;
   }
