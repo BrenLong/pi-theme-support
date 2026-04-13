@@ -21,6 +21,7 @@ Generate a professional Theme Support email response following Brendan's templat
    - Read investigation summary
    - Understand the solution
    - Note any limitations or caveats
+   - **Collect all URLs shared during the conversation** - scan the entire chat history for any screenshot URLs, screen recording URLs, or other links Brendan provided during investigation. These MUST be included in the email as Markdown links. Do not wait to be reminded.
 
 2. **Determine Email Type**
    - Solution email (in-scope, you can help)
