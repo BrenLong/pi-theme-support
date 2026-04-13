@@ -69,6 +69,7 @@ Not everything worked out of the box:
 - Scope assessment against Design Policy
 - Bug escalation preparation
 - Live storefront HTML/CSS analysis
+- **Zendesk queue access** — Pi can query Zendesk views directly via the Views API using an authenticated browser session (visible Chrome mode). Currently connected to Theme Support Unassigned, My Unresolved Tickets, and Theme Support PQ Unresolved views. Enables scanning queues, checking ticket counts, and pulling ticket details without leaving Pi.
 
 ### What's Not Yet Validated
 
@@ -86,6 +87,8 @@ Not everything worked out of the box:
 | `close-ticket` | Close | Generate the internal note and update the Impact Tracker in a single step |
 | `draft-scope-assessment` | Assess | Determine if a request is in or out of scope per Design Policy |
 | `escalate-theme-bug` | Escalate | Prepare a bug report with evidence, reproduction steps, and responsible team info |
+| `zendesk-queue` | Queue | Scan Zendesk views: Theme Support Unassigned, My Unresolved Tickets, and Theme Support PQ Unresolved |
+| `live-assist` | Live | Analyse a Live Assist chat transcript and provide troubleshooting assistance |
 
 ## Structure
 
@@ -100,7 +103,9 @@ Not everything worked out of the box:
 │   ├── draft-merchant-email/  # Response drafting
 │   ├── close-ticket/          # Internal note + Impact Tracker
 │   ├── draft-scope-assessment/# Scope check
-│   └── escalate-theme-bug/    # Bug escalation
+│   ├── escalate-theme-bug/    # Bug escalation
+│   ├── zendesk-queue/         # Zendesk queue scanning via Views API
+│   └── live-assist/           # Live Assist chat analysis
 ├── extensions/
 │   ├── support-core/          # Custom-built: Zendesk + Help Center access
 │   ├── dev-mcp/               # Patched: shopify.dev docs + theme validation
