@@ -25,9 +25,9 @@ Most of this is research and synthesis — exactly the kind of work an AI agent 
 
 ### The Approach
 
-The workflow follows a three-phase model: **Intake → Investigate → Draft**.
+The workflow follows a four-phase model: **Intake → Investigate → Draft → Close**.
 
-Each phase is a Pi skill that automates the research and presents findings for the advisor to review. The advisor still makes scope decisions, reviews all responses, and handles merchant communication.
+Each phase is a Pi skill that handles the work for that stage. The advisor still makes scope decisions, reviews all responses, and handles merchant communication.
 
 A key part of this workflow is **merchant history awareness**. Before any response is drafted, the system searches for the merchant's previous tickets to build a complete picture — what solutions were already offered, which ones failed, and how the merchant's experience has been so far. This prevents repeating information, avoids suggesting solutions that have already been tried, and ensures the response acknowledges the merchant's full journey.
 
@@ -52,19 +52,20 @@ Not everything worked out of the box:
 - Built a comprehensive AGENTS.md context file (~600 lines) covering scope rules, theme categorization, email templates, and decision trees
 - Added auto-session-naming to the start-ticket skill so sessions are easy to find when merchants follow up days later
 
-### Phase 4: Theme Code Access (Current)
+### Phase 4: Theme Code Access and Storefront Inspection
 
-Exploring ways for Pi to access theme source code directly:
-
-- **Live storefront analysis** — Pi can fetch the public HTML/CSS from a merchant's storefront and reverse-engineer CSS/layout issues from the rendered output. Useful for quick triage but can't see Liquid source or merchant modifications. This works today.
+- **Chrome DevTools storefront inspection** — Pi can browse the public storefront using an isolated Chrome browser, take snapshots, inspect elements, evaluate scripts, and check the browser console. Validated on a live ticket: used it to identify that a reviews app (Loox) renders in an iframe, confirm CSS selectors had zero matches, and verify font settings. This is now a core part of the investigation workflow.
+- **Live storefront analysis** — Pi can fetch the public HTML/CSS from a merchant's storefront and reverse-engineer CSS/layout issues from the rendered output. Useful for quick triage but can't see Liquid source or merchant modifications.
 - **Admin GraphQL API** — The Admin API has a `theme.files` query that can read theme files directly. Validated the query, upgraded Shopify CLI from 3.84.1 → 3.93.2 to get the required `shopify store auth` / `shopify store execute` commands. Requires on-shift authentication to the merchant's store. **Not yet tested during a live shift.**
 
 ### What's Working
 
 - Ticket intake with automatic context gathering across multiple tools
 - Session naming and resumption for multi-day ticket work
-- Investigation across Scout, Zendesk, GitHub, Vault, Slack, and shopify.dev
-- Email drafting following team templates
+- Hands-on investigation: theme code analysis, storefront inspection via Chrome DevTools
+- Chrome DevTools for live storefront element inspection, console checks, and script evaluation
+- Email drafting following Shopify style guide, first-touch resolution principles, and team templates
+- Post-email close-out: internal notes and Impact Tracker updates in a single step
 - Scope assessment against Design Policy
 - Bug escalation preparation
 - Live storefront HTML/CSS analysis
@@ -73,16 +74,16 @@ Exploring ways for Pi to access theme source code directly:
 
 - Direct theme file access via Admin API (needs on-shift auth test)
 - Full end-to-end workflow on a high volume of tickets
-- Edge cases in skill workflows
 - Team-wide adoption and feedback
 
 ## Skills
 
 | Skill | Phase | Description |
 |-------|-------|-------------|
-| `start-ticket` | Intake | Pull a Zendesk ticket, extract key info, auto-name the session, search the merchant's previous tickets, and gather context from similar issues across tools |
-| `investigate-theme` | Investigate | Deep-dive research using shopify.dev, GitHub, past tickets, Scout, Vault, and Slack |
-| `draft-merchant-email` | Draft | Generate a response following team email templates, adapted to the merchant's tone |
+| `start-ticket` | Intake | Pull a Zendesk ticket, extract key info, auto-name the session, build replication steps, and gather context as needed |
+| `investigate-theme` | Investigate | Hands-on code analysis, live storefront inspection via Chrome DevTools, app involvement checks, and fix verification |
+| `draft-merchant-email` | Draft | Generate a response following Shopify style guide, first-touch resolution principles, and team templates |
+| `close-ticket` | Close | Generate the internal note and update the Impact Tracker in a single step |
 | `draft-scope-assessment` | Assess | Determine if a request is in or out of scope per Design Policy |
 | `escalate-theme-bug` | Escalate | Prepare a bug report with evidence, reproduction steps, and responsible team info |
 
@@ -95,8 +96,9 @@ Exploring ways for Pi to access theme source code directly:
 ├── USAGE.md                   # Daily workflow reference
 ├── skills/
 │   ├── start-ticket/          # Ticket intake
-│   ├── investigate-theme/     # Issue research
+│   ├── investigate-theme/     # Code analysis and storefront inspection
 │   ├── draft-merchant-email/  # Response drafting
+│   ├── close-ticket/          # Internal note + Impact Tracker
 │   ├── draft-scope-assessment/# Scope check
 │   └── escalate-theme-bug/    # Bug escalation
 ├── extensions/
