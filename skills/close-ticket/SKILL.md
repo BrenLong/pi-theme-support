@@ -65,8 +65,6 @@ Status: Solved | Blocked | Escalated | Waiting on Merchant | Waiting on Other Te
 Next step (if not solved): what's needed, who owns it, and by when.
 ```
 
-Always include the final email text at the bottom of the internal note under a "Here's the final email I sent:" heading.
-
 ### Follow-up Update
 
 For each subsequent email on the same ticket, append an update to the existing internal note.
