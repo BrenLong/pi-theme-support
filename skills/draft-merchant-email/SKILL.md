@@ -102,6 +102,7 @@ Or provide context:
 - Open the file in the browser using `open` command (NOT VS Code)
 - Brendan will Cmd+A, Cmd+C from the browser, then paste into Zendesk as rich text
 - Do NOT include `<html>`, `<head>`, or `<body>` wrapper tags with styling - just raw content
+- ALWAYS include the copy button as the first element in the HTML file. The button label should be "Copy Email". See the copy button template below.
 - Use `<br><br>` between paragraphs for spacing
 - Use `<br>` for single line breaks (e.g. before signature)
 - Use `<h3>` for section headers (e.g. `<h3>What I found:</h3>`)
@@ -129,4 +130,27 @@ Or provide context:
 - Do NOT output emails inline in Pi - always write to a file
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
+
+## Copy Button Template
+
+Include this as the FIRST element in every HTML file. Change the button label to match the content type ("Copy Email" or "Copy Internal Note").
+
+```html
+<button id="pi-copy-btn" onclick="
+var btn=this;var clone=document.body.cloneNode(true);
+clone.removeChild(clone.querySelector('#pi-copy-btn'));
+var tmp=document.createElement('div');
+tmp.appendChild(clone);
+tmp.style.position='absolute';tmp.style.left='-9999px';
+document.body.appendChild(tmp);
+var sel=window.getSelection();sel.removeAllRanges();
+var r=document.createRange();r.selectNodeContents(tmp);
+sel.addRange(r);document.execCommand('copy');
+sel.removeAllRanges();document.body.removeChild(tmp);
+btn.textContent='Copied!';btn.style.background='#4caf50';
+setTimeout(function(){btn.textContent='LABEL';btn.style.background='#008060';},1500);
+" style="position:fixed;top:16px;right:16px;z-index:99999;padding:10px 20px;background:#008060;color:white;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">LABEL</button>
+```
+
+Replace `LABEL` with "Copy Email" or "Copy Internal Note" as appropriate.
 
