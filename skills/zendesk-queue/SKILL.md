@@ -14,9 +14,17 @@ Scan Zendesk views to see what's in the Theme Support unassigned queue and your 
 - Starting a shift and wanting to see the current state of things
 
 ## Prerequisites
+- For Brendan's personal queue (PQ): Use `search_zendesk_tickets_by_advisor` with `brendan.long@shopify.com` - no browser needed
+- For the unassigned team queue: Use the browser method below (requires Zendesk login)
+
+### Browser method (unassigned queue only)
 - Pi's browser must be logged into Zendesk (`shopify.zendesk.com`)
 - The browser session must be active (visible mode via `chrome-devtools.json` set to `{"launchMode":"visible"}`)
 - If not logged in, navigate to `https://shopify.zendesk.com/agent/` and ask the user to sign in
+
+## Preferred Method: Personal Queue
+
+Always use `search_zendesk_tickets_by_advisor` with `advisor_email: brendan.long@shopify.com` when checking Brendan's PQ. This avoids browser login issues and is faster.
 
 ## Zendesk View IDs
 | View | ID | URL |
