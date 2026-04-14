@@ -145,16 +145,36 @@ Live Assist is a continuous conversation. As Brendan pastes follow-up messages o
 - Use plain text headers like `TO THE ADVISOR:`, `ADVISOR RESPONSE:`, `TO THE MERCHANT:` - no Markdown bold/formatting in headers
 - Briefings and analysis can still be output inline in Pi - only copy-pasteable messages go to the file
 
-## Internal Notes
+## Closing a Live Assist
 
-When Brendan asks for an internal note during or after a Live Assist session:
+When Brendan asks to close/end a Live Assist session, generate both an internal note and Impact Tracker entry - same as close-ticket but adapted for Live Assist.
 
-- ALWAYS write to a `.md` file (e.g. `~/Desktop/Pi comms/live-assist-internal-note.md`) and open in VS Code using `code` command
+### Internal Note
+
+- ALWAYS write to a `.md` file (`~/Desktop/Pi comms/live-assist-internal-note.md`) and open in VS Code using `code` command
 - NEVER use HTML format for Live Assist internal notes
 - NEVER include a Zendesk ticket number - Live Assist tickets are created after the chat ends, so the number doesn't exist yet
-- Keep the internal URL (services/internal link) in relevant links
 - Follow the same internal note template structure from the close-ticket skill, minus the ticket number
-- Impact Tracker entries for Live Assist also omit the Zendesk ticket number
+- Keep detail proportional to the session's complexity
+
+### Store Internal Link
+
+The internal link format is `https://app.shopify.com/services/internal/shops/{shop_id}`. Unlike Zendesk tickets (where the internal link is already in the ticket data), Live Assist requires extracting the shop ID from the storefront.
+
+If the storefront is open in Chrome DevTools, use `chrome_evaluate_script`:
+```js
+() => { const m = document.documentElement.outerHTML.match(/shop_id["\s:=]+(\d+)/i); return m ? m[1] : null; }
+```
+
+Build the link: `https://app.shopify.com/services/internal/shops/{shop_id}`
+
+NEVER guess or fabricate the internal link - always extract the shop ID from the storefront page source.
+
+### Impact Tracker
+
+- Same document and process as close-ticket skill
+- Omit the Zendesk ticket number field - replace with `Zendesk ticket number: Live Assist (no ticket number)`
+- All other fields remain the same
 
 ## Required MCPs
 - support-core (Help Center, Zendesk)
