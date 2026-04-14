@@ -151,9 +151,10 @@ Live Assist is a continuous conversation. As Brendan pastes follow-up messages o
 
 ## Output Format
 
-- ALL draft messages (to advisor, advisor responses, to merchant) MUST be written to `~/Desktop/live-assist-messages.md` - never output inline in Pi as copy-pasting from Pi causes formatting issues (extra spaces/line breaks)
-- ALWAYS overwrite the same file with the latest messages
-- ALWAYS open the file automatically after writing it (`open ~/Desktop/live-assist-messages.md`)
+- ALL draft messages (to advisor, advisor responses, to merchant) MUST be written to `~/Desktop/Pi comms/live-assist-{descriptive-name}.md` - never output inline in Pi as copy-pasting from Pi causes formatting issues (extra spaces/line breaks)
+- The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `slideshow-issue`, `header-alignment`, `app-conflict`)
+- Each new message in the same session should append a sequential number (e.g. `live-assist-slideshow-issue-1.md`, `live-assist-slideshow-issue-2.md`)
+- ALWAYS open the file automatically after writing it
 - Use plain text headers like `TO THE ADVISOR:`, `ADVISOR RESPONSE:`, `TO THE MERCHANT:` - no Markdown bold/formatting in headers
 - Briefings and analysis can still be output inline in Pi - only copy-pasteable messages go to the file
 
@@ -163,7 +164,7 @@ When Brendan asks to close/end a Live Assist session, generate both an internal 
 
 ### Internal Note
 
-- ALWAYS write to a `.md` file (`~/Desktop/Pi comms/live-assist-internal-note.md`) and open in VS Code using `code` command
+- ALWAYS write to a `.md` file (`~/Desktop/Pi comms/live-assist-internal-note-{descriptive-name}.md`) and open in VS Code using `code` command. The `{descriptive-name}` should match the topic used for the session's message files.
 - NEVER use HTML format for Live Assist internal notes
 - NEVER include a Zendesk ticket number - Live Assist tickets are created after the chat ends, so the number doesn't exist yet
 - Follow the same internal note template structure from the close-ticket skill, minus the ticket number

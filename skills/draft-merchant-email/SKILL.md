@@ -98,7 +98,8 @@ Or provide context:
 ## File Format: English vs Non-English Merchants
 
 ### English-speaking merchants: HTML file
-- Write the email to an `.html` file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.html`)
+- Write the email to an `.html` file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply-{descriptive-name}.html`)
+- The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`)
 - Open the file in the browser using `open` command (NOT VS Code)
 - Brendan will Cmd+A, Cmd+C from the browser, then paste into Zendesk as rich text
 - Do NOT include `<html>`, `<head>`, or `<body>` wrapper tags with styling - just raw content
@@ -113,7 +114,8 @@ Or provide context:
 - Add clear section headers where appropriate to break up the email into scannable parts
 
 ### Non-English-speaking merchants: Markdown file
-- Write the email to a `.md` file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.md`)
+- Write the email to a `.md` file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply-{descriptive-name}.md`)
+- The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`)
 - Open the file in VS Code using `code` command
 - Brendan will copy the raw Markdown and paste it into Zendesk's translation tool (`#translate_to_merchant`)
 - Use standard inline Markdown: `**bold**`, `[Link text](url)`, etc.

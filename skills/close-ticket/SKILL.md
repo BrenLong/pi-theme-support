@@ -14,7 +14,7 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
 ## Process
 
 1. **Generate Internal Note**
-   - Always write to an `.html` file (`~/Desktop/Pi comms/ticket-{number}-internal-note.html`) and open in the browser using `open` command, regardless of merchant language. Internal notes are for the team, not the merchant.
+   - Always write to an `.html` file (`~/Desktop/Pi comms/ticket-{number}-internal-note-{descriptive-name}.html`) and open in the browser using `open` command, regardless of merchant language. The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`). Use the same descriptive name as the corresponding email file for consistency. Internal notes are for the team, not the merchant.
    - Use the same HTML formatting rules as merchant emails: `<h3>` for section headers, `<ul>/<li>` for bullets, `<br><br>` between sections for spacing, `<b><u><a href="url">text</a></u></b>` for links. Internal/services links should display the full URL as link text. No font/colour styling.
    - ALWAYS include the copy button as the first element in the HTML file with label "Copy Internal Note". See the copy button template in the draft-merchant-email skill.
    - NEVER append to the email file
@@ -121,3 +121,4 @@ Update - [DD/MM/YYYY]:
 - Plain text only in the Impact Tracker - use hyphens (-) for bullets, line breaks for structure
 - Do not include emojis in either output
 - The separator (---) at the top of Impact Tracker entries keeps them visually distinct
+- Design Time is ONLY for customization requests (new functionality, styling changes). Never mention Design Time when the ticket involves fixing a bug or issue - it does not apply.

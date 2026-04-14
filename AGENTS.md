@@ -122,6 +122,7 @@ Fully unsupported - Refer to original theme developer or Shopify Partner
 - Multiple requests: Can use full 60 minutes
 - Merchant must have Design Time available
 - Track manually in store's internal page
+- IMPORTANT: Design Time is ONLY used for customization requests (new functionality, styling changes, layout adjustments). Fixing bugs, issues, or broken behaviour NEVER uses Design Time - do not mention Design Time in internal notes, Impact Tracker entries, or emails when resolving an issue or bug.
 
 #### Limitations (Cannot Support):
 - Edit checkout pages
@@ -295,11 +296,11 @@ Is it checkout-related?
   - `[Shopify Partner](https://www.shopify.com/partners/directory)`
 - When Brendan provides a screenshot URL during investigation, it is intended to be included in the merchant email as a Markdown link — do NOT leave it as a placeholder or ask for confirmation
 - Apply this to ALL links: Help Center articles, screenshots, screen recordings, app contact pages, external resources, etc.
-- For **English-speaking merchants**: write the email to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.html`) and open it in the browser using `open` command. Use `<br><br>` for paragraph breaks, `<b>` for section headers, `<b><u><a href="url">text</a></u></b>` for links. No font/colour styling - let Zendesk handle that. Brendan will copy from the browser and paste into Zendesk as rich text.
-- For **non-English-speaking merchants**: write the email to a `.md` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.md`) and open it in VS Code using `code` command. Use inline Markdown formatting. Brendan will copy the raw Markdown into Zendesk's translation tool (`#translate_to_merchant`).
+- For **English-speaking merchants**: write the email to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply-{descriptive-name}.html`) and open it in the browser using `open` command. The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`). Use `<br><br>` for paragraph breaks, `<b>` for section headers, `<b><u><a href="url">text</a></u></b>` for links. No font/colour styling - let Zendesk handle that. Brendan will copy from the browser and paste into Zendesk as rich text.
+- For **non-English-speaking merchants**: write the email to a `.md` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply-{descriptive-name}.md`) and open it in VS Code using `code` command. The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`). Use inline Markdown formatting. Brendan will copy the raw Markdown into Zendesk's translation tool (`#translate_to_merchant`).
 - Do NOT output emails inline in Pi - always write to a file
 - Internal notes are ALWAYS created as HTML files regardless of merchant language - they are for the team, not the merchant
-- When writing code snippets for Brendan (e.g. Liquid, CSS, HTML for theme work), ALWAYS save them to an .html file in Pi comms (e.g. `~/Desktop/Pi comms/ticket-{number}-code.html`) and open it - do NOT output code inline in Pi
+- When writing code snippets for Brendan (e.g. Liquid, CSS, HTML for theme work), ALWAYS save them to an .html file in Pi comms (e.g. `~/Desktop/Pi comms/ticket-{number}-code-{descriptive-name}.html`) and open it - do NOT output code inline in Pi
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
 
@@ -309,7 +310,7 @@ Is it checkout-related?
 
 ### CRITICAL: Escalation Macros (Zendesk)
 - Escalation macros are treated the same way as internal notes and public replies
-- ALWAYS write escalation macros to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-escalation-macro.html`) and open in the browser using `open` command
+- ALWAYS write escalation macros to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-escalation-macro-{descriptive-name}.html`) and open in the browser using `open` command
 - Use the same HTML formatting: `<br><br>` for paragraph breaks, `<b>` for section headers, `<b><u><a href="url">text</a></u></b>` for links. No font/colour styling.
 - ALWAYS include the copy button as the first element with label "Copy Escalation". See the copy button template in the draft-merchant-email skill.
 - Brendan will use the copy button, then paste into Zendesk's internal note field with the escalation macro applied
