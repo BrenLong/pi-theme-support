@@ -114,6 +114,17 @@ Update - [DD/MM/YYYY]:
 - [Status change if applicable]
 ```
 
+## Store Internal Link
+
+The internal link format is `https://app.shopify.com/services/internal/shops/{shop_id}`. To get the shop ID automatically:
+
+1. If the storefront is open in Chrome DevTools, run:
+   ```js
+   () => { const m = document.documentElement.outerHTML.match(/shop_id["\s:=]+(\d+)/i); return m ? m[1] : null; }
+   ```
+2. Build the link: `https://app.shopify.com/services/internal/shops/{shop_id}`
+3. NEVER guess or fabricate the internal link - always extract the shop ID from the storefront page source
+
 ## Notes
 - Internal note and Impact Tracker always happen together - don't do one without the other
 - Be concise in both - these are quick references, not full reports
