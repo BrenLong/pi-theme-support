@@ -291,6 +291,7 @@ Is it checkout-related?
 - When Brendan provides a screenshot URL during investigation, it is intended to be included in the merchant email as a Markdown link — do NOT leave it as a placeholder or ask for confirmation
 - Apply this to ALL links: Help Center articles, screenshots, screen recordings, app contact pages, external resources, etc.
 - ALWAYS write the final email to a .md file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.md`) so it can be opened in VS Code and copy-pasted cleanly into Zendesk - do NOT output emails inline in Pi, as both rendered Markdown and code blocks cause formatting issues when pasting
+- ALWAYS open files in VS Code after creating or modifying them using `open` command (e.g. `open ~/Desktop/Pi\ comms/ticket-{number}-reply.md`) so Brendan can see changes immediately
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
 
