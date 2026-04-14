@@ -49,10 +49,9 @@ After delivering the briefing and holding message, immediately rename the sessio
   - Format: `[Store Name] - [Merchant Name] - Live Assist`
   - Example: `/name Marcos Store - Marcos Andrade - Live Assist`
 - Call the `set_terminal_title` tool to set the VS Code terminal tab title
-  - Format: `[store-handle] - LA - [brief issue]`
-  - The store handle is the myshopify.com URL without `.myshopify.com` (e.g. `marcos-andrade`)
-  - Example: call `set_terminal_title` with title `marcos-andrade - LA - Product images not displaying`
-- If store URL or merchant name aren't available from the transcript yet, set what you can and update later when the information becomes available
+  - Format: `LA - [Advisor's first name]`
+  - Example: call `set_terminal_title` with title `LA - Janelyn`
+- If the advisor's name isn't available from the transcript yet, use `LA - Unknown` and update later when the information becomes available
 
 ### 2. Troubleshooting Assistance
 
