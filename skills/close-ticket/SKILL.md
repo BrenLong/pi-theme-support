@@ -16,7 +16,11 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
 1. **Generate Internal Note**
    - Write to a separate file in the Pi comms folder: `~/Desktop/Pi comms/ticket-{number}-internal-note.md`
    - NEVER append to the email file
-   - Use the appropriate template below (First Touch or Follow-up Update)
+   - **Determine if this is a First Touch or Follow-up:**
+     - Check the Zendesk ticket history (from start-ticket or PQ data) for existing internal notes from Brendan
+     - If Brendan has already posted an internal note on this ticket, this is a **Follow-up Update** - generate ONLY the update section, not a full internal note
+     - If no prior internal note exists from Brendan, this is a **First Touch** - generate the full internal note
+   - Use the appropriate template below
    - Keep detail proportional to the ticket's complexity
 
 2. **Update Impact Tracker**
