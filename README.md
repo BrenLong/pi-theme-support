@@ -89,6 +89,11 @@ Not everything worked out of the box:
 | `escalate-theme-bug` | Escalate | Prepare a bug report with evidence, reproduction steps, and responsible team info |
 | `zendesk-queue` | Queue | Scan Zendesk views: Theme Support Unassigned, My Unresolved Tickets, and Theme Support PQ Unresolved |
 | `live-assist` | Live | Analyse a Live Assist chat transcript and provide troubleshooting assistance |
+| `chrome-devtools`* | Investigate | Browser automation for storefront debugging, page inspection, screenshots, and console checks |
+| `code-review`* | Review | Parallel code review by specialized reviewer agents (scope, architecture, security, performance) |
+| `data-portal`* | Data | Data discovery, metadata lookup, and BigQuery queries via Shopify Data Portal |
+
+\* Installed via the `shop-pi-fy` package.
 
 ## Structure
 
@@ -105,14 +110,33 @@ Not everything worked out of the box:
 │   ├── draft-scope-assessment/# Scope check
 │   ├── escalate-theme-bug/    # Bug escalation
 │   ├── zendesk-queue/         # Zendesk queue scanning via Views API
-│   └── live-assist/           # Live Assist chat analysis
+│   ├── live-assist/           # Live Assist chat analysis
+│   ├── chrome-devtools -> *   # Browser automation (via shop-pi-fy)
+│   ├── code-review -> *       # Parallel code review (via shop-pi-fy)
+│   └── data-portal -> *       # Data Portal queries (via shop-pi-fy)
 ├── extensions/
 │   ├── support-core/          # Custom-built: Zendesk + Help Center access
 │   ├── dev-mcp/               # Patched: shopify.dev docs + theme validation
-│   └── ...                    # Other extensions via Tool Gateway / shop-pi-fy
+│   ├── beacon-chat-extractor/ # Custom-built: OrangeMonkey userscript for Beacon Live Assist
+│   ├── title.ts               # Custom-built: set VS Code terminal tab title per ticket
+│   ├── chrome-devtools -> *   # Browser automation (via shop-pi-fy)
+│   ├── incidents -> *         # Platform incident search (via shop-pi-fy)
+│   ├── perplexity-research -> *  # Web search (via shop-pi-fy)
+│   ├── save-to-md -> *        # Export to Markdown (via shop-pi-fy)
+│   ├── scout -> *             # Merchant frustrations + feedback (via shop-pi-fy)
+│   ├── subagent -> *          # Delegated sub-agent tasks (via shop-pi-fy)
+│   ├── shopify-proxy -> *     # Shopify AI proxy (via Nix)
+│   └── vscode-bridge -> *    # VS Code integration (via shop-pi-fy)
+├── bin/                       # CLI helpers (chrome-devtools, shopify)
+├── beacon-chat-extractor.user.js  # Userscript source for Beacon chat extraction
+├── chrome-devtools.json       # Chrome DevTools config
+├── keybindings.json           # Custom keybindings
+├── settings.json              # Pi settings
 ├── config/                    # Pi configuration (credentials gitignored)
 └── sessions/                  # Conversation history (gitignored)
 ```
+
+Entries marked with `-> *` are symlinks to packages installed via `shop-pi-fy` or Nix.
 
 ## Tools Connected
 
