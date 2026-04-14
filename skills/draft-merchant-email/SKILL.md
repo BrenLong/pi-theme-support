@@ -95,6 +95,29 @@ After /investigate-theme, use:
 Or provide context:
 /draft-merchant-email merchant_name="Marcos" issue="images not displaying" solution="add missing CSS bracket"
 
+## File Format: English vs Non-English Merchants
+
+### English-speaking merchants: HTML file
+- Write the email to an `.html` file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.html`)
+- Open the file in the browser using `open` command (NOT VS Code)
+- Brendan will Cmd+A, Cmd+C from the browser, then paste into Zendesk as rich text
+- Do NOT include `<html>`, `<head>`, or `<body>` wrapper tags with styling - just raw content
+- Use `<br><br>` between paragraphs for spacing
+- Use `<br>` for single line breaks (e.g. before signature)
+- Use `<h3>` for section headers (e.g. `<h3>What I found:</h3>`)
+- Use `<h4>` for sub-section headers if needed
+- In Markdown files (non-English), use `###` for section headers and `####` for sub-sections
+- Use `<b><u><a href="url">Link text</a></u></b>` for all links - bold and underlined
+- Do NOT set font-family, font-size, or color - let Zendesk handle all font styling
+- Add clear section headers where appropriate to break up the email into scannable parts
+
+### Non-English-speaking merchants: Markdown file
+- Write the email to a `.md` file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.md`)
+- Open the file in VS Code using `code` command
+- Brendan will copy the raw Markdown and paste it into Zendesk's translation tool (`#translate_to_merchant`)
+- Use standard inline Markdown: `**bold**`, `[Link text](url)`, etc.
+- The translation tool needs raw Markdown to process correctly
+
 ## Notes
 - Always include merchant's name (personalization matters)
 - Keep tone friendly even for out-of-scope
@@ -102,10 +125,8 @@ Or provide context:
 - If complex issue, consider breaking into numbered steps
 - Remember: they might get a survey about this email
 - Screenshot references boost clarity
-- ALL links MUST use Markdown format: `[Link title](url)` — this applies to Help Center articles, screenshots, screen recordings, app contact pages, and any other URLs
-- When Brendan provides a screenshot or recording URL during investigation, include it directly in the email as a Markdown link — never leave it as a placeholder
-- ALWAYS write the final email to a .md file in the Pi comms folder (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.md`) so Brendan can open it in VS Code and copy-paste the raw Markdown cleanly into Zendesk - do NOT output the email inline in Pi, as both rendered Markdown and code blocks cause formatting issues when pasting
-- When pasting into Zendesk, use **Cmd+Shift+V** (paste without formatting) to avoid double-spaced paragraphs. Remind Brendan of this if it hasn't been mentioned recently.
+- When Brendan provides a screenshot or recording URL during investigation, include it directly in the email - never leave it as a placeholder
+- Do NOT output emails inline in Pi - always write to a file
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
 
