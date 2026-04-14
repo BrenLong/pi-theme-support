@@ -271,6 +271,11 @@ Is it checkout-related?
 - ALWAYS check for **previous tickets** from the same merchant (via Zendesk) related to the same issue — understand what's already been tried, what solutions were offered, and what the merchant's experience has been so far
 - Use this full context to craft the best possible response — don't repeat information the merchant already has, don't suggest solutions that have already failed, and acknowledge their journey if they've been dealing with this across multiple interactions
 
+### CRITICAL: Date Format
+- ALL dates, everywhere, must use DD/MM/YYYY format (e.g., 14/04/2026)
+- This applies to emails, internal notes, Impact Tracker entries, follow-up updates, and any other output
+- Never use YYYY-MM-DD, MM/DD/YYYY, or written-out formats like "April 14, 2026"
+
 ### CRITICAL: Tone and Communication Style
 - Match the merchant's tone and communication style
 - Adjust language to their technical ability level
