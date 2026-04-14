@@ -18,9 +18,11 @@ Analyse a Live Assist (Beacon) chat transcript and provide real-time troubleshoo
 
 ## Process
 
-### 1. Analyse the Chat Transcript
+### 1. Analyse the Chat Transcript + Provide Holding Message
 
-When Brendan pastes a transcript, immediately produce a **concise briefing**:
+When Brendan pastes a transcript, IMMEDIATELY produce two things before any investigation:
+
+**A) Concise briefing** (output inline in Pi):
 
 **LIVE ASSIST BRIEFING**
 
@@ -33,7 +35,11 @@ When Brendan pastes a transcript, immediately produce a **concise briefing**:
 - **Scope:** [In Scope / Out of Scope / Needs Investigation] with brief reasoning
 - **My take:** [Your quick assessment - what you think the issue is and suggested next steps]
 
-Keep this tight. Brendan is in a live chat and needs to absorb context fast.
+**B) Holding message** (written to file immediately alongside the briefing):
+
+A draft message to the advisor + an advisor response for the merchant, letting them know the specialist is investigating and will be back shortly. This gives Brendan something to send RIGHT AWAY while investigation happens in the background.
+
+Do NOT start any investigation (DevTools, GitHub, Slack, code analysis, etc.) until BOTH the briefing and holding message have been delivered to Brendan.
 
 ### 2. Troubleshooting Assistance
 
@@ -138,6 +144,17 @@ Live Assist is a continuous conversation. As Brendan pastes follow-up messages o
 - ALWAYS open the file automatically after writing it (`open ~/Desktop/live-assist-messages.md`)
 - Use plain text headers like `TO THE ADVISOR:`, `ADVISOR RESPONSE:`, `TO THE MERCHANT:` - no Markdown bold/formatting in headers
 - Briefings and analysis can still be output inline in Pi - only copy-pasteable messages go to the file
+
+## Internal Notes
+
+When Brendan asks for an internal note during or after a Live Assist session:
+
+- ALWAYS write to a `.md` file (e.g. `~/Desktop/Pi comms/live-assist-internal-note.md`) and open in VS Code using `code` command
+- NEVER use HTML format for Live Assist internal notes
+- NEVER include a Zendesk ticket number - Live Assist tickets are created after the chat ends, so the number doesn't exist yet
+- Keep the internal URL (services/internal link) in relevant links
+- Follow the same internal note template structure from the close-ticket skill, minus the ticket number
+- Impact Tracker entries for Live Assist also omit the Zendesk ticket number
 
 ## Required MCPs
 - support-core (Help Center, Zendesk)
