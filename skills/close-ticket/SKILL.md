@@ -19,8 +19,8 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
    - NEVER append to the email file
    - **Determine if this is a First Touch or Follow-up:**
      - Check the Zendesk ticket history (from start-ticket or PQ data) for existing internal notes from Brendan
-     - If Brendan has already posted an internal note on this ticket, this is a **Follow-up Update** - generate ONLY the update section, not a full internal note
      - If no prior internal note exists from Brendan, this is a **First Touch** - generate the full internal note
+     - If Brendan has already posted an internal note on this ticket, this is a **Follow-up Update** - reproduce the FULL existing internal note (including all previous updates) unchanged, then append the new update section at the bottom. Brendan will paste the entire thing as a single internal note, so it must be complete.
    - Use the appropriate template below
    - Keep detail proportional to the ticket's complexity
 
