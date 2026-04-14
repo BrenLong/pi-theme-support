@@ -41,6 +41,19 @@ A draft message to the advisor + an advisor response for the merchant, letting t
 
 Do NOT start any investigation (DevTools, GitHub, Slack, code analysis, etc.) until BOTH the briefing and holding message have been delivered to Brendan.
 
+### 1b. Auto-Name Session and Terminal Tab
+
+After delivering the briefing and holding message, immediately rename the session and terminal tab using information extracted from the transcript:
+
+- Run `/name` to set the session name
+  - Format: `[Store Name] - [Merchant Name] - Live Assist`
+  - Example: `/name Marcos Store - Marcos Andrade - Live Assist`
+- Call the `set_terminal_title` tool to set the VS Code terminal tab title
+  - Format: `[store-handle] - LA - [brief issue]`
+  - The store handle is the myshopify.com URL without `.myshopify.com` (e.g. `marcos-andrade`)
+  - Example: call `set_terminal_title` with title `marcos-andrade - LA - Product images not displaying`
+- If store URL or merchant name aren't available from the transcript yet, set what you can and update later when the information becomes available
+
 ### 2. Troubleshooting Assistance
 
 After the briefing, assist with investigation using the same tools and approach as the investigate-theme skill:
