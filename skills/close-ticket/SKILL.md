@@ -14,7 +14,8 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
 ## Process
 
 1. **Generate Internal Note**
-   - Write to a separate file in the Pi comms folder: `~/Desktop/Pi comms/ticket-{number}-internal-note.md`
+   - For **English-speaking merchants**: write to an `.html` file (`~/Desktop/Pi comms/ticket-{number}-internal-note.html`) and open in the browser using `open` command. Use the same HTML formatting rules as merchant emails: `<h3>` for section headers, `<ul>/<li>` for bullets, `<br><br>` between sections for spacing, `<b><u><a href="url">text</a></u></b>` for links. Internal/services links should display the full URL as link text. No font/colour styling.
+   - For **non-English-speaking merchants**: write to a `.md` file (`~/Desktop/Pi comms/ticket-{number}-internal-note.md`) and open in VS Code using `code` command. Use inline Markdown formatting.
    - NEVER append to the email file
    - **Determine if this is a First Touch or Follow-up:**
      - Check the Zendesk ticket history (from start-ticket or PQ data) for existing internal notes from Brendan

@@ -298,6 +298,7 @@ Is it checkout-related?
 - For **English-speaking merchants**: write the email to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.html`) and open it in the browser using `open` command. Use `<br><br>` for paragraph breaks, `<b>` for section headers, `<b><u><a href="url">text</a></u></b>` for links. No font/colour styling - let Zendesk handle that. Brendan will copy from the browser and paste into Zendesk as rich text.
 - For **non-English-speaking merchants**: write the email to a `.md` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply.md`) and open it in VS Code using `code` command. Use inline Markdown formatting. Brendan will copy the raw Markdown into Zendesk's translation tool (`#translate_to_merchant`).
 - Do NOT output emails inline in Pi - always write to a file
+- The same English (HTML) vs non-English (Markdown) file format rules apply to internal notes - see the close-ticket skill for details
 - When writing code snippets for Brendan (e.g. Liquid, CSS, HTML for theme work), ALWAYS save them to an .html file in Pi comms (e.g. `~/Desktop/Pi comms/ticket-{number}-code.html`) and open it - do NOT output code inline in Pi
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
