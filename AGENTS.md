@@ -307,6 +307,16 @@ Is it checkout-related?
 - Internal notes and Impact Tracker updates are handled by the close-ticket skill
 - See the close-ticket skill for templates and format
 
+### CRITICAL: Escalation Macros (Zendesk)
+- Escalation macros are treated the same way as internal notes and public replies
+- ALWAYS write escalation macros to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-escalation-macro.html`) and open in the browser using `open` command
+- Use the same HTML formatting: `<br><br>` for paragraph breaks, `<b>` for section headers, `<b><u><a href="url">text</a></u></b>` for links. No font/colour styling.
+- ALWAYS include the copy button as the first element with label "Copy Escalation". See the copy button template in the draft-merchant-email skill.
+- Brendan will use the copy button, then paste into Zendesk's internal note field with the escalation macro applied
+- Do NOT output escalation macros inline in Pi - always write to a file
+- Be strictly factual - do not speculate about causes or include unnecessary detail
+- Shopify Plus stores are out of Theme Support scope - escalate to Developer Support Front End using the `[ESCALATE] Developer Support - Manual Escalation` macro (Theme Support specialists have permission to use this macro directly)
+
 ---
 
 ### Base Email Template
