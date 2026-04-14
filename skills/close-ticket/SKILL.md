@@ -14,7 +14,7 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
 ## Process
 
 1. **Generate Internal Note**
-   - Write to a separate file on the Desktop: `~/Desktop/ticket-{number}-internal-note.md`
+   - Write to a separate file in the Pi comms folder: `~/Desktop/Pi comms/ticket-{number}-internal-note.md`
    - NEVER append to the email file
    - Use the appropriate template below (First Touch or Follow-up Update)
    - Keep detail proportional to the ticket's complexity
