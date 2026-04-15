@@ -307,8 +307,8 @@ Is it checkout-related?
 - For **English-speaking merchants**: write the email to an `.html` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply-{descriptive-name}.html`) and open it in the browser using `open` command. The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`). Use `<br><br>` for paragraph breaks, `<b>` for section headers, `<b><u><a href="url">text</a></u></b>` for links. No font/colour styling - let Zendesk handle that. Brendan will copy from the browser and paste into Zendesk as rich text.
 - For **non-English-speaking merchants**: write the email to a `.md` file (e.g. `~/Desktop/Pi comms/ticket-{number}-reply-{descriptive-name}.md`) and open it in VS Code using `code` command. The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `header-alignment`, `mobile-menu-fix`, `out-of-scope-custom-code`). Use inline Markdown formatting. Brendan will copy the raw Markdown into Zendesk's translation tool (`#translate_to_merchant`).
 - Do NOT output emails inline in Pi - always write to a file
-- Internal notes are output directly in Pi as Markdown code blocks - Brendan will copy and paste into Zendesk
-- When writing code snippets for Brendan (e.g. Liquid, CSS, HTML for theme work), output them directly in Pi using code blocks. Do NOT write code snippets to files - just present them inline in the conversation so Brendan can copy them easily.
+- Internal notes are ALWAYS created as HTML files regardless of merchant language - they are for the team, not the merchant
+- When writing code snippets for Brendan (e.g. Liquid, CSS, HTML for theme work), ALWAYS save them to an .html file in Pi comms (e.g. `~/Desktop/Pi comms/ticket-{number}-code-{descriptive-name}.html`) and open it - do NOT output code inline in Pi
 - NEVER use emojis in emails - no checkmarks, no icons, no symbols
 - NEVER use em dashes in emails - use a regular hyphen (-) or rephrase the sentence instead
 
