@@ -52,28 +52,27 @@ Not everything worked out of the box:
 - Built a comprehensive AGENTS.md context file (~600 lines) covering scope rules, theme categorization, email templates, and decision trees
 - Added auto-session-naming to the start-ticket skill so sessions are easy to find when merchants follow up days later
 
-### Phase 4: Theme Code Access and Storefront Inspection
+### Phase 4: Investigation Workflow Refinement
 
-- **Chrome DevTools storefront inspection** — Pi can browse the public storefront using an isolated Chrome browser, take snapshots, inspect elements, evaluate scripts, and check the browser console. Validated on a live ticket: used it to identify that a reviews app (Loox) renders in an iframe, confirm CSS selectors had zero matches, and verify font settings. This is now a core part of the investigation workflow.
-- **Live storefront analysis** — Pi can fetch the public HTML/CSS from a merchant's storefront and reverse-engineer CSS/layout issues from the rendered output. Useful for quick triage but can't see Liquid source or merchant modifications.
-- **Admin GraphQL API** — The Admin API has a `theme.files` query that can read theme files directly. Validated the query, upgraded Shopify CLI from 3.84.1 → 3.93.2 to get the required `shopify store auth` / `shopify store execute` commands. Requires on-shift authentication to the merchant's store. **Not yet tested during a live shift.**
+- **File-first investigation** — After testing Chrome DevTools storefront access on live tickets, found that asking the specialist for theme files is faster and more reliable than navigating storefronts. Pi now identifies which files are needed and asks the specialist to copy-paste them from Admin Edit Code.
+- **Tiered investigation approach** — Code analysis first, browser inspector screenshots second (when code alone isn't enough), Chrome DevTools only when specifically requested.
+- **Chrome DevTools** — Still available for when rendered output is genuinely needed (screenshots, console errors, element inspection), but no longer the default investigation method.
 
 ### What's Working
 
 - Ticket intake with automatic context gathering across multiple tools
 - Session naming and resumption for multi-day ticket work
-- Hands-on investigation: theme code analysis, storefront inspection via Chrome DevTools
-- Chrome DevTools for live storefront element inspection, console checks, and script evaluation
+- File-first investigation: specialist pastes theme files, Pi analyses code
+- Tiered investigation: code analysis → inspector screenshots → Chrome DevTools (if needed)
 - Email drafting following Shopify style guide, first-touch resolution principles, and team templates
 - Post-email close-out: internal notes and Impact Tracker updates in a single step
 - Scope assessment against Design Policy
 - Bug escalation preparation
-- Live storefront HTML/CSS analysis
-- **Zendesk queue access** — Pi can query Zendesk views directly via the Views API using an authenticated browser session (visible Chrome mode). Currently connected to Theme Support Unassigned, My Unresolved Tickets, and Theme Support PQ Unresolved views. Enables scanning queues, checking ticket counts, and pulling ticket details without leaving Pi.
+- Live Assist chat analysis with real-time troubleshooting
+- Zendesk queue scanning via Views API
 
 ### What's Not Yet Validated
 
-- Direct theme file access via Admin API (needs on-shift auth test)
 - Full end-to-end workflow on a high volume of tickets
 - Team-wide adoption and feedback
 
@@ -82,7 +81,7 @@ Not everything worked out of the box:
 | Skill | Phase | Description |
 |-------|-------|-------------|
 | `start-ticket` | Intake | Pull a Zendesk ticket, extract key info, auto-name the session, build replication steps, and gather context as needed |
-| `investigate-theme` | Investigate | Hands-on code analysis, live storefront inspection via Chrome DevTools, app involvement checks, and fix verification |
+| `investigate-theme` | Investigate | Hands-on code analysis, app involvement checks, and fix verification |
 | `draft-merchant-email` | Draft | Generate a response following Shopify style guide, first-touch resolution principles, and team templates |
 | `close-ticket` | Close | Generate the internal note and update the Impact Tracker in a single step |
 | `draft-scope-assessment` | Assess | Determine if a request is in or out of scope per Design Policy |
@@ -100,7 +99,7 @@ Not everything worked out of the box:
 ```
 ├── AGENTS.md                  # Core context: role, scope rules, email templates
 ├── README.md                  # This file
-├── SETUP.md                   # Installation notes
+├── SETUP.md                   # Installation and prerequisites
 ├── USAGE.md                   # Daily workflow reference
 ├── skills/
 │   ├── start-ticket/          # Ticket intake
@@ -128,7 +127,6 @@ Not everything worked out of the box:
 │   ├── shopify-proxy -> *     # Shopify AI proxy (via Nix)
 │   └── vscode-bridge -> *    # VS Code integration (via shop-pi-fy)
 ├── bin/                       # CLI helpers (chrome-devtools, shopify)
-├── beacon-chat-extractor.user.js  # Userscript source for Beacon chat extraction
 ├── chrome-devtools.json       # Chrome DevTools config
 ├── keybindings.json           # Custom keybindings
 ├── settings.json              # Pi settings
@@ -150,21 +148,6 @@ Entries marked with `-> *` are symlinks to packages installed via `shop-pi-fy` o
 - Scout — merchant frustrations, support tickets, product feedback, app reviews, community posts, sales calls
 - Dev MCP — shopify.dev documentation, Liquid/GraphQL/component validation
 - Incidents — platform incident search and tracking
-
-## Shopify CLI Note
-
-The `shopify store` commands (for direct theme file API access) require CLI version 3.93.0+. If you have an older version installed via Homebrew, the pnpm-installed version lives at `~/.local/share/pnpm/shopify`.
-
-```bash
-# Check version
-shopify version
-
-# Upgrade if needed
-pnpm install -g @shopify/cli@latest
-
-# New binary location
-~/.local/share/pnpm/shopify version
-```
 
 ## License
 

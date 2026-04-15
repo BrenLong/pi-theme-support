@@ -41,22 +41,20 @@ pi -r
 
 ## Investigation Workflow
 
-### Quick Investigation
-Ask Pi directly: "Can you check the live storefront for [issue]?"
-Pi will fetch the public HTML/CSS and analyze the rendered output.
+Pi investigates by asking you for theme files rather than accessing the storefront directly. The typical flow:
 
-### Deep Investigation
+1. Pi identifies which files are relevant based on the issue
+2. Pi asks you to copy-paste those files from Admin Edit Code
+3. Pi analyses the code and identifies the root cause
+4. If code alone isn't enough, Pi asks for browser inspector screenshots of specific elements
+5. Pi provides the fix or scope determination
+
+### Triggering an Investigation
 ```
 /skill:investigate-theme
 ```
 
-### Theme File Access (Requires On-Shift Auth)
-```bash
-# Authenticate to the merchant's store (one time per store)
-~/.local/share/pnpm/shopify store auth --store <store>.myshopify.com --scopes read_themes
-
-# Pi can then query theme files directly (read-only)
-```
+Or just paste the theme files directly — Pi will often start investigating as part of `start-ticket` without needing a separate skill call.
 
 ## Drafting Responses
 
@@ -76,9 +74,28 @@ Pi will fetch the public HTML/CSS and analyze the rendered output.
 /skill:escalate-theme-bug
 ```
 
+## Live Assist
+
+Paste a Beacon chat transcript and Pi will provide a briefing, holding message, and troubleshooting assistance.
+
+```
+/skill:live-assist
+```
+
+## Closing a Ticket
+
+After sending the email:
+
+```
+/skill:close-ticket
+```
+
+This generates the internal note and updates the Impact Tracker in one step.
+
 ## Tips
 
 - **Always read the full chat history** before drafting a response — Pi does this automatically with `start-ticket`
 - **Name your sessions** immediately so you can find them later
 - **Check for previous tickets** from the same merchant to avoid repeating information
 - **Match the merchant's tone** — Pi's email templates are starting frameworks, not rigid scripts
+- **Paste theme files directly** — Pi analyses code faster than navigating storefronts
