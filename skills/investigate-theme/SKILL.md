@@ -93,6 +93,7 @@ Theme: [Name & Version]
 ## Notes
 - Ask Brendan for theme files rather than trying to access the storefront - this is faster and more reliable
 - Only use Chrome DevTools if Brendan specifically asks for it, or for tasks where rendered output is genuinely needed
+- Password-protected stores are not an obstacle - Brendan has access to store passwords. Only ask for the password if Pi needs to check something directly in the browser.
 - Compare modified code against the original theme source to isolate changes
 - Identify ALL custom code, not just the suspected cause - helps build the full picture
 - Address secondary issues found during investigation - don't leave loose threads
