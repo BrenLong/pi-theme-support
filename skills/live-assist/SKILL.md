@@ -37,7 +37,23 @@ When Brendan pastes a transcript, IMMEDIATELY produce two things before any inve
 
 **B) Holding message** (written to file immediately alongside the briefing):
 
-A draft message to the advisor + an advisor response for the merchant, letting them know the specialist is investigating and will be back shortly. This gives Brendan something to send RIGHT AWAY while investigation happens in the background.
+This is a FIXED template - do NOT customise it, add issue details, or hint at what you're investigating. Advisors tend to jump the gun with partial information, so keep it generic. The only dynamic parts are the advisor's first name and the merchant's first name.
+
+```
+Hey [ADVISOR FIRST NAME]! Taking a look - I'll be back with you shortly when I have more information :)
+
+In the meantime, you can say this to the merchant:
+
+Thanks for your patience, [MERCHANT FIRST NAME]. I've connected with our technical specialist and he's now getting caught up on this issue. I'll be back to you here as soon as we have an update. Thank you again.
+```
+
+Replace [ADVISOR FIRST NAME] and [MERCHANT FIRST NAME] with the actual names extracted from the transcript. If a name isn't available, use a neutral fallback (e.g. "there" for the advisor, "" and drop the name for the merchant).
+
+Do NOT:
+- Add any details about the issue
+- Mention what you're going to check
+- Give the advisor any technical context yet
+- Vary the wording based on the issue
 
 Do NOT start any investigation (DevTools, GitHub, Slack, code analysis, etc.) until BOTH the briefing and holding message have been delivered to Brendan.
 

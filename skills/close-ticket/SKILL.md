@@ -27,7 +27,7 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
    - Document: "2026 Q4 Impact Tracker - Personal"
    - Document ID: 1jVRYIeDQr4I2sT5ICZJMZijXDFaTFfKbLwhETiUs-x8
    - First touch: append to end of doc using `gws_docs_write`
-   - Follow-up: use `gws_docs_read` to find the existing entry, then insert the update at the correct position using `gws_docs_write` with the `index` parameter
+   - Follow-up: use `gws_docs_read` to find the existing entry by matching the Zendesk ticket number, then use `gws_docs_replace` to insert the update directly below that ticket's entry (before the next ticket's date separator). Always verify you're targeting the correct ticket - do NOT just append to the end of the doc.
    - Use the appropriate template below (First Touch or Follow-up Update)
 
 3. **Confirm Completion**
