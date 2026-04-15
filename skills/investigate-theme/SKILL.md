@@ -8,7 +8,7 @@ Hands-on investigation of a theme issue through code analysis.
 
 ## When to Use
 - After running start-ticket
-- When the issue requires looking at theme code or the live storefront
+- When the issue requires looking at theme code
 - Before drafting merchant response
 
 ## Process
