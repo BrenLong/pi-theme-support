@@ -14,6 +14,14 @@ I'm Brendan, a Shopify Theme Support Specialist. I help merchants troubleshoot t
 8. If necessary, I submit bug reports or merchant frustrations
 9. Track Design Time manually in store's internal page (internal only)
 
+## How Pi Should Investigate
+- **Ask Brendan for theme files** rather than trying to access live storefronts via Chrome DevTools
+- Brendan is already in the Admin Edit Code interface and can copy-paste files quickly
+- Pi should identify which files are needed and ask for them (e.g. "Can I see `sections/header.liquid` and `assets/base.css`?")
+- This is faster and more reliable than navigating storefronts, dealing with password pages, or interpreting rendered output
+- Chrome DevTools should only be used when Brendan specifically asks for it, or for tasks where rendered output is genuinely needed (e.g. taking a screenshot, checking console errors on a public storefront)
+- Pi's strength is reading and analysing code - let Brendan handle the navigation
+
 ## Tools I Use
 - Zendesk for ticket management
 - Shopify Admin Edit Code interface (shows merchant modifications)

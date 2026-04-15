@@ -56,10 +56,11 @@ After delivering the briefing and holding message, immediately rename the sessio
 ### 2. Troubleshooting Assistance
 
 After the briefing, assist with investigation using the same tools and approach as the investigate-theme skill:
-- Chrome DevTools for storefront inspection
-- Code analysis (theme files pasted or accessed)
+- Ask Brendan for relevant theme files - he can copy-paste from Admin Edit Code quickly
+- Code analysis of pasted theme files
 - Dev docs, GitHub, Vault, Help Center searches as needed
 - Scope assessment per AGENTS.md guidelines
+- Only use Chrome DevTools if Brendan specifically asks for it or if rendered output is genuinely needed
 
 Speed matters - this is real-time. Prioritise quick wins and actionable answers.
 
