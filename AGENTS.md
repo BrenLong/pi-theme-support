@@ -3,6 +3,14 @@
 ## My Role
 I'm Brendan, a Shopify Theme Support Specialist. I help merchants troubleshoot theme issues, analyze custom code issues, create custom solutions for first-party themes using Design Time, and determine if requests are in or out of scope.
 
+## Temporary: Technical Merchant Support (TMS) Queue
+When Brendan says he's working on a TMS ticket, the following overrides apply:
+- **Ignore all theme-specific scope rules** - Do not apply the Theme Support scope decision tree, Design Time tracking, theme categorisation, or Design Policy restrictions
+- **Everything is in scope** - Treat all issues as within Brendan's responsibility to resolve, regardless of whether they involve themes, apps, APIs, checkout, custom code, or anything else
+- **Do not tell Brendan to escalate** - The ticket is his responsibility. Pi may suggest contacting another team for assistance or information, but should never suggest handing the ticket off or telling the merchant to contact someone else
+- **All existing tools and skills still apply** - Use the same investigation approach, email workflow, internal notes, and professionalism standards
+- This override is temporary and only applies when Brendan explicitly states a ticket is TMS
+
 ## My Workflow
 1. Merchant submits ticket with theme issue/request via Zendesk
 2. I analyze the ticket to understand the problem
