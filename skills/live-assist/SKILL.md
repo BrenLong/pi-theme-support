@@ -35,11 +35,9 @@ When Brendan pastes a transcript, IMMEDIATELY produce two things before any inve
 - **Scope:** [In Scope / Out of Scope / Needs Investigation] with brief reasoning
 - **My take:** [Your quick assessment - what you think the issue is and suggested next steps]
 
-**B) Holding message** (output inline in Pi, immediately after the briefing):
+**B) Holding message** (written to file immediately alongside the briefing):
 
 This is a FIXED template - do NOT customise it, add issue details, or hint at what you're investigating. Advisors tend to jump the gun with partial information, so keep it generic. The only dynamic parts are the advisor's first name and the merchant's first name.
-
-Output it exactly like this (plain text, no formatting, no bold, no bullets - just the raw text Brendan can copy):
 
 ```
 Hey [ADVISOR FIRST NAME]! Taking a look - I'll be back with you shortly when I have more information :)
@@ -56,15 +54,24 @@ Do NOT:
 - Mention what you're going to check
 - Give the advisor any technical context yet
 - Vary the wording based on the issue
-- Write it to a file - output it inline for speed
-
-If Brendan reports formatting issues when copying the holding message from Pi, fall back to writing it to a file.
 
 Do NOT start any investigation (DevTools, GitHub, Slack, code analysis, etc.) until BOTH the briefing and holding message have been delivered to Brendan.
 
+### 1b. Auto-Name Session and Terminal Tab
+
+After delivering the briefing and holding message, immediately rename the session and terminal tab using information extracted from the transcript:
+
+- Run `/name` to set the session name
+  - Format: `[Store Name] - [Merchant Name] - Live Assist`
+  - Example: `/name Marcos Store - Marcos Andrade - Live Assist`
+- Call the `set_terminal_title` tool to set the VS Code terminal tab title
+  - Format: `LA - [Advisor's first name]`
+  - Example: call `set_terminal_title` with title `LA - Janelyn`
+- If the advisor's name isn't available from the transcript yet, use `LA - Unknown` and update later when the information becomes available
+
 ### 2. Troubleshooting Assistance
 
-Immediately after delivering the briefing and holding message, begin investigation. Speed is everything.
+After the briefing, assist with investigation. Speed is everything.
 
 **Investigation priority order (fastest first):**
 1. **Ask Brendan** - he's right there in Admin Edit Code. Ask for the specific files you need rather than searching blind. This is almost always the fastest path.
@@ -73,17 +80,6 @@ Immediately after delivering the briefing and holding message, begin investigati
 4. **Chrome DevTools** - last resort, only if Brendan explicitly authorises it.
 
 Do NOT run multiple speculative searches in parallel hoping one hits. Ask Brendan what he sees, form a hypothesis, then verify with a targeted search if needed.
-
-### 2b. Auto-Name Session and Terminal Tab
-
-After the first response/message has been delivered (not before), rename the session and terminal tab:
-
-- Call the `set_terminal_title` tool to set the VS Code terminal tab title
-  - Format: `LA - [Advisor's first name]`
-  - Example: call `set_terminal_title` with title `LA - Janelyn`
-- If the advisor's name isn't available from the transcript yet, use `LA - Unknown` and update later when the information becomes available
-
-This is a low-priority housekeeping step - never delay investigation or responses to do it.
 
 ### 3. Draft Messages
 
