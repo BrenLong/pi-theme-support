@@ -27,8 +27,11 @@ When Brendan says he's working on a TMS ticket, the following overrides apply:
 - Brendan is already in the Admin Edit Code interface and can copy-paste files quickly
 - Pi should identify which files are needed and ask for them (e.g. "Can I see `sections/header.liquid` and `assets/base.css`?")
 - This is faster and more reliable than navigating storefronts, dealing with password pages, or interpreting rendered output
-- Chrome DevTools should only be used when Brendan specifically asks for it, or for tasks where rendered output is genuinely needed (e.g. taking a screenshot, checking console errors on a public storefront)
-- Pi's strength is reading and analysing code - let Brendan handle the navigation
+- **NEVER navigate to or load merchant storefronts in Chrome DevTools unless Brendan explicitly authorises it** - this is a last resort, not a default investigation step
+- There are almost always better options: Brendan sharing theme files, checking replication manually, reading code, searching logs, etc.
+- If Pi believes visiting a storefront would be useful, it MUST ask Brendan first and explain why - do not just open the URL
+- Chrome DevTools is fine for non-merchant tasks (e.g. opening Pi comms HTML files, Shopify Help Center, documentation pages)
+- Pi's strength is reading and analysing code - let Brendan handle the navigation and visual verification
 
 ## Tools I Use
 - Zendesk for ticket management
@@ -43,6 +46,62 @@ When Brendan says he's working on a TMS ticket, the following overrides apply:
 - Vault: Search internal knowledge base and team documentation
 - Grokt: Search Shopify codebase
 - Observe: Check production logs and errors
+
+---
+
+## Shopify Admin Layout Reference
+
+Use this as the source of truth for admin navigation when providing instructions to merchants. Do NOT rely on outdated documentation or internet sources.
+
+### Online Store > Themes
+- **Current theme section:** Large desktop + mobile preview, theme name with "Current theme" badge, last saved timestamp, version number
+- **"Edit theme"** button on the right to open the theme editor
+- **"..."** (three-dot menu) next to Edit theme with options: View, Rename, Duplicate, Edit code, Edit default theme content, Download theme file
+- **Draft themes section:** Listed below current theme with heading "Draft themes". Each draft theme has: thumbnail, name, last saved/added date, version, its own "..." menu, "Publish" button, and "Edit theme" button
+
+### Content (left sidebar)
+Expands to show:
+- **Metaobjects**
+- **Files** (where all store files are stored)
+- **Menus** (where navigation lives - e.g. Main Menu, Footer menu, Customer account main menu)
+- **Blog posts**
+
+Note: Navigation/menus are under **Content > Menus**, NOT "Online Store > Navigation".
+
+### Markets (left sidebar)
+Expands to show:
+- **Catalogs**
+- **Rollouts**
+
+Main Markets page shows:
+- Left panel: "Store default" with "+ Regions" option
+- Market list with columns: Market, Status, Includes (countries with flags), Customizations
+- Quick-create suggestions at bottom (e.g. "Create European Union Market", "Create United Kingdom Market")
+- "Create market" button top-right, "Graph view" toggle
+
+### Settings (left sidebar, bottom)
+Settings page has its own left-side navigation with a search bar at the top. Sections listed:
+- General
+- Plan
+- Billing
+- Users
+- Payments
+- Checkout
+- Customer accounts
+- Shipping and delivery
+- Taxes and duties
+- Locations
+- Apps
+- Sales channels
+- Domains
+- Customer events
+- Notifications
+- Metafields and metaobjects
+- Languages
+- Customer privacy
+- Policies
+
+Store owner info shown at the bottom of the Settings sidebar.
 
 ---
 

@@ -35,9 +35,11 @@ When Brendan pastes a transcript, IMMEDIATELY produce two things before any inve
 - **Scope:** [In Scope / Out of Scope / Needs Investigation] with brief reasoning
 - **My take:** [Your quick assessment - what you think the issue is and suggested next steps]
 
-**B) Holding message** (written to file immediately alongside the briefing):
+**B) Holding message** (output inline in Pi, immediately after the briefing):
 
 This is a FIXED template - do NOT customise it, add issue details, or hint at what you're investigating. Advisors tend to jump the gun with partial information, so keep it generic. The only dynamic parts are the advisor's first name and the merchant's first name.
+
+Output it exactly like this (plain text, no formatting, no bold, no bullets - just the raw text Brendan can copy):
 
 ```
 Hey [ADVISOR FIRST NAME]! Taking a look - I'll be back with you shortly when I have more information :)
@@ -54,31 +56,34 @@ Do NOT:
 - Mention what you're going to check
 - Give the advisor any technical context yet
 - Vary the wording based on the issue
+- Write it to a file - output it inline for speed
+
+If Brendan reports formatting issues when copying the holding message from Pi, fall back to writing it to a file.
 
 Do NOT start any investigation (DevTools, GitHub, Slack, code analysis, etc.) until BOTH the briefing and holding message have been delivered to Brendan.
 
-### 1b. Auto-Name Session and Terminal Tab
+### 2. Troubleshooting Assistance
 
-After delivering the briefing and holding message, immediately rename the session and terminal tab using information extracted from the transcript:
+Immediately after delivering the briefing and holding message, begin investigation. Speed is everything.
 
-- Run `/name` to set the session name
-  - Format: `[Store Name] - [Merchant Name] - Live Assist`
-  - Example: `/name Marcos Store - Marcos Andrade - Live Assist`
+**Investigation priority order (fastest first):**
+1. **Ask Brendan** - he's right there in Admin Edit Code. Ask for the specific files you need rather than searching blind. This is almost always the fastest path.
+2. **Code analysis** - analyse files Brendan pastes. This is Pi's core strength.
+3. **Targeted tool searches** - Dev docs, GitHub, Vault, Help Center - but only when you have a specific question. Don't do broad exploratory searches during live assist.
+4. **Chrome DevTools** - last resort, only if Brendan explicitly authorises it.
+
+Do NOT run multiple speculative searches in parallel hoping one hits. Ask Brendan what he sees, form a hypothesis, then verify with a targeted search if needed.
+
+### 2b. Auto-Name Session and Terminal Tab
+
+After the first response/message has been delivered (not before), rename the session and terminal tab:
+
 - Call the `set_terminal_title` tool to set the VS Code terminal tab title
   - Format: `LA - [Advisor's first name]`
   - Example: call `set_terminal_title` with title `LA - Janelyn`
 - If the advisor's name isn't available from the transcript yet, use `LA - Unknown` and update later when the information becomes available
 
-### 2. Troubleshooting Assistance
-
-After the briefing, assist with investigation using the same tools and approach as the investigate-theme skill:
-- Ask Brendan for relevant theme files - he can copy-paste from Admin Edit Code quickly
-- Code analysis of pasted theme files
-- Dev docs, GitHub, Vault, Help Center searches as needed
-- Scope assessment per AGENTS.md guidelines
-- Only use Chrome DevTools if Brendan specifically asks for it or if rendered output is genuinely needed
-
-Speed matters - this is real-time. Prioritise quick wins and actionable answers.
+This is a low-priority housekeeping step - never delay investigation or responses to do it.
 
 ### 3. Draft Messages
 
@@ -170,7 +175,8 @@ Live Assist is a continuous conversation. As Brendan pastes follow-up messages o
 
 - ALL draft messages (to advisor, advisor responses, to merchant) MUST be written to `~/Desktop/Pi comms/live-assist-{descriptive-name}.md` - never output inline in Pi as copy-pasting from Pi causes formatting issues (extra spaces/line breaks)
 - The `{descriptive-name}` should be a short, kebab-case summary of the topic (e.g. `slideshow-issue`, `header-alignment`, `app-conflict`)
-- Each new message in the same session should append a sequential number (e.g. `live-assist-slideshow-issue-1.md`, `live-assist-slideshow-issue-2.md`)
+- Use a **single file per session** - overwrite the same file (`live-assist-{descriptive-name}.md`) each time with the latest message. Brendan only needs the current message, not a history. Do NOT create numbered files (no `-1.md`, `-2.md`, etc.)
+- Only create a separate file when the content type is genuinely different (e.g. an internal note is a different file from the messages)
 - ALWAYS open the file automatically after writing it
 - Use plain text headers like `TO THE ADVISOR:`, `ADVISOR RESPONSE:`, `TO THE MERCHANT:` - no Markdown bold/formatting in headers
 - Briefings and analysis can still be output inline in Pi - only copy-pasteable messages go to the file
