@@ -32,6 +32,8 @@ Always use `search_zendesk_tickets_by_advisor` with `advisor_email: brendan.long
 | Theme Support \| Unassigned | `4469570815501` | `https://shopify.zendesk.com/agent/filters/4469570815501` |
 | My Unresolved Tickets | `32208473` | `https://shopify.zendesk.com/agent/filters/32208473` |
 | Theme Support PQ Unresolved | `11227426874381` | `https://shopify.zendesk.com/agent/filters/11227426874381` |
+| Technical Merchant Support - Unassigned | `36090153865229` | `https://shopify.zendesk.com/agent/filters/36090153865229` |
+| Technical Support Triage | `7926941474061` | `https://shopify.zendesk.com/agent/filters/7926941474061` |
 
 ## How It Works
 
