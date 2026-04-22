@@ -43,14 +43,23 @@ Retrieve and analyze a Shopify Theme Support ticket to begin work.
    - The subject is a brief description of the issue
    - Example: call `set_terminal_title` with title `marcos-andrade - Product images not displaying`
 
-4. **Gather Context (as needed)**
+4. **Check for Theme Files**
+   - After extracting the store URL, check if a theme zip has been downloaded for this store
+   - Look in `~/Desktop/` for zip files matching the store handle (e.g. `theme_export__marcos-andrade-myshopify-com*.zip`)
+   - Also check if files have already been extracted in `~/Desktop/themes/[store-handle]/`
+   - If a zip is found but not yet extracted, unzip it to `~/Desktop/themes/[store-handle]/`
+   - If no zip is found, let Brendan know: "I don't have the theme files for this store yet. If you'd like me to have direct access, you can download the theme zip from Admin (three-dot menu > Download theme file) and drop it on your Desktop."
+   - This is optional - investigation can proceed without it (Brendan can paste files as needed)
+   - Having the full theme locally means Pi can search across all files, check for modifications, and read any file instantly without asking Brendan
+
+5. **Gather Context (as needed)**
    Context searches are optional and should be done when they'd add value, not on every ticket. Use judgement based on the issue type:
    - **Widespread/recurring issues:** Search Scout for merchant frustration patterns and Zendesk for similar resolved tickets
    - **Suspected theme bugs:** Search dev-mcp/GitHub for known issues
    - **Unfamiliar issues:** Search Vault for team documentation and past solutions
    - **Simple/clear-cut issues:** Skip context gathering and move straight to investigation
 
-5. **Initial Assessment**
+6. **Initial Assessment**
    - Categorize issue type:
      * Default theme bug
      * Custom code conflict
