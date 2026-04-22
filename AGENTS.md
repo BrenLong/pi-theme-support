@@ -158,7 +158,7 @@ Fully unsupported - Refer to original theme developer or Shopify Partner
   - Investigate and explain what the custom code is doing wrong
   - Create duplicate theme with custom code removed to demonstrate it's not a theme bug
   - Assess whether duplicate theme is viable solution or if it would remove other needed functionality
-  - Cannot provide workarounds for custom code
+  - Cannot provide workarounds for custom code, unless a very straightforward fix
   - Refer to original developer who added the code, or external developer like a Shopify Partner
 - If AI-generated code (Shopify Magic/Sidekick blocks) is causing issues:
   - Cannot support AI-generated blocks - see [limitations documentation](https://help.shopify.com/en/manual/online-store/themes/customizing-themes/theme-editor/shopify-magic/generate-blocks)
@@ -201,7 +201,7 @@ Fully unsupported - Refer to original theme developer or Shopify Partner
 
 #### Limitations (Cannot Support):
 - Edit checkout pages
-- Modify custom code (including AI-generated code from Shopify Magic/Sidekick)
+- Modifying customisations made via custom code (including AI-generated code from Shopify Magic/Sidekick)
 - Troubleshoot themes with significant code changes
 - Troubleshoot or modify third-party app code
 - Edit rich text editor content (pages, blog posts)
@@ -274,8 +274,7 @@ Examples of first-party apps:
 
 #### Third-Party Apps:
 - If issue is caused by a third-party app → Contact app developer
-- Access app support: Settings > Apps > Click app > Look for support option
-- Some apps have chat widgets or contact details in settings
+- Access app support: In app chat widget if available, email if not
 - Even on first-party themes: App issues are app developer's responsibility
 - App developer must ensure their app works with themes
 
@@ -284,12 +283,6 @@ Examples of first-party apps:
 2. If app developer says incompatible or can't help:
    - Contact theme developer, OR
    - Contact external developer like a Shopify Partner
-
-#### What We Do:
-- First-party apps: Escalate internally, consult app team before responding
-- Third-party apps: Do NOT facilitate contact with app developers
-- Point merchant to app support locations
-- Explain app developer's responsibility (third-party apps only)
 
 #### What We Do:
 - First-party apps: Escalate internally, consult app team before responding
