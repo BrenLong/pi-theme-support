@@ -38,10 +38,9 @@ Retrieve and analyze a Shopify Theme Support ticket to begin work.
    - Example: `/name Marcos Store - Marcos Andrade - Ticket #58893236`
    - This makes the session easy to find later with `pi -r` or `/resume`
    - Also call the `set_terminal_title` tool to set the VS Code terminal tab title
-   - Format: `[store-handle] - [subject]`
-   - The store handle is the myshopify.com URL without `.myshopify.com` (e.g. `marcos-andrade`)
+   - Format: `[ticket-number] - [subject]`
    - The subject is a brief description of the issue
-   - Example: call `set_terminal_title` with title `marcos-andrade - Product images not displaying`
+   - Example: call `set_terminal_title` with title `58893236 - Product images not displaying`
 
 4. **Check for Theme Files**
    - After extracting the store URL, check if a theme zip has been downloaded for this store
