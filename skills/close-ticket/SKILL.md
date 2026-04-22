@@ -66,8 +66,16 @@ A quick, 1-2 sentence overview of the merchant's problem.
 (Omit any that are not relevant)
 
 ### Next Steps / Resolution
-Status: Solved | Blocked | Escalated | Waiting on Merchant | Waiting on Other Team
+Status: Solved | Waiting on Merchant | Further Investigation Required | Escalated | Blocked | Waiting on Other Team
 (Delete statuses that are not relevant)
+
+Status logic:
+- Solved: Default for first touch responses. Use when a fix has been provided (even if speculative/untested), a solution is offered and merchant is asked to try it, the issue is explained with a resolution path, or an out-of-scope determination with referral is provided. We expect first touch resolution - do not use "Waiting on Merchant" just because we asked them to test a fix.
+- Waiting on Merchant: Use ONLY when we have explicitly asked the merchant to provide something we need to proceed (e.g. "Can you send me the file?", "Can you check X and let me know?") on a long-running ticket where we genuinely cannot move forward without their input.
+- Further Investigation Required: Use when we have told the merchant we will carry out a customization (Design Time work), the ticket has been moved to the queue for deeper investigation, we need to do more research/testing before providing a solution, or a live assist where we told the advisor we will follow up.
+- Escalated: Handed off to another team (e.g. engineering, app team).
+- Blocked: Cannot proceed due to an external dependency.
+- Waiting on Other Team: We have reached out internally and need a response before we can continue.
 
 Next step (if not solved): what's needed, who owns it, and by when.
 ```
