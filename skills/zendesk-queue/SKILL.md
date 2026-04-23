@@ -22,6 +22,16 @@ Scan Zendesk views to see what's in the Theme Support unassigned queue and your 
 - The browser session must be active (visible mode via `chrome-devtools.json` set to `{"launchMode":"visible"}`)
 - If not logged in, navigate to `https://shopify.zendesk.com/agent/` and ask the user to sign in
 
+### IMPORTANT: Automatic visible mode switching
+When the browser method is needed and `~/.pi/agent/chrome-devtools.json` is set to `{"launchMode":"isolated"}` (the default), Pi MUST:
+1. Write `{"launchMode":"visible"}` to `~/.pi/agent/chrome-devtools.json`
+2. **Ask Brendan to reload Pi** (the extension reads the config on startup, so a reload is required for the change to take effect)
+3. After reload, navigate to `https://shopify.zendesk.com/agent/` — the visible browser window will appear for Brendan to sign in
+4. Once Zendesk queries are complete, **revert** `~/.pi/agent/chrome-devtools.json` back to `{"launchMode":"isolated"}`
+5. No further reload is needed after reverting — it will take effect next time Pi starts
+
+The config file location is `~/.pi/agent/chrome-devtools.json` (NOT in the skills directory). Do NOT write to `~/.pi/agent/skills/chrome-devtools/chrome-devtools.json` — that is not the correct location.
+
 ## Preferred Method: Personal Queue
 
 Always use `search_zendesk_tickets_by_advisor` with `advisor_email: brendan.long@shopify.com` when checking Brendan's PQ. This avoids browser login issues and is faster.
