@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Beacon Chat Extractor
 // @namespace    https://github.com/BrenLong/pi-theme-support
-// @version      0.3.0
+// @version      0.6.0
 // @description  Extract Beacon Live Assist chat transcripts for Pi
 // @match        https://beacon.shopify.io/*
 // @grant        GM_setClipboard
@@ -17,13 +17,13 @@
   btn.textContent = 'Copy Chat';
   btn.style.cssText = [
     'position: fixed',
-    'bottom: 16px',
-    'right: 16px',
+    'top: 9px',
+    'right: 130px',
     'z-index: 99999',
     'padding: 8px 16px',
-    'background: #1a1a1a',
+    'background: #2563eb',
     'color: #fff',
-    'border: 1px solid #333',
+    'border: 1px solid #1d4ed8',
     'border-radius: 8px',
     'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     'font-size: 13px',
@@ -33,173 +33,299 @@
     'transition: background 0.15s, transform 0.1s',
   ].join(';');
 
-  btn.addEventListener('mouseenter', () => { btn.style.background = '#333'; });
-  btn.addEventListener('mouseleave', () => { btn.style.background = '#1a1a1a'; });
+  btn.addEventListener('mouseenter', () => { btn.style.background = '#1d4ed8'; });
+  btn.addEventListener('mouseleave', () => { btn.style.background = '#2563eb'; });
   btn.addEventListener('mousedown', () => { btn.style.transform = 'scale(0.96)'; });
   btn.addEventListener('mouseup', () => { btn.style.transform = 'scale(1)'; });
 
   document.body.appendChild(btn);
 
-  // --- Store Info Extraction (content-based search) ---
+  // --- Show button only when status is "Chats" ---
 
-  function extractStoreInfo() {
+  function updateButtonVisibility() {
+    const statusSpan = document.querySelector('span.text-text-on-fill');
+    const isChats = statusSpan && statusSpan.textContent.trim() === 'Chats';
+    btn.style.display = isChats ? 'block' : 'none';
+  }
+
+  updateButtonVisibility();
+  const observer = new MutationObserver(updateButtonVisibility);
+  observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-status-name'] });
+
+  // --- Account Tab Extraction ---
+
+  function extractAccountInfo() {
     const lines = [];
-    const allLeafEls = document.querySelectorAll('*:not(:has(*))');
+    let storeHandle = null;
 
-    for (const el of allLeafEls) {
-      const text = el.textContent.trim();
-      if (!text || text.length > 200) continue;
-
-      // Store URL
-      if (!lines.some(l => l.startsWith('Store:')) && text.match(/^[\w-]+\.myshopify\.com$/)) {
-        lines.push('Store: ' + text);
+    // Name - via aria-label "Copy name"
+    const nameBtn = document.querySelector('button[aria-label="Copy name"]');
+    if (nameBtn) {
+      const nameDiv = nameBtn.closest('.grid')?.querySelector('.overflow-auto.break-words');
+      if (nameDiv) {
+        const name = nameDiv.textContent.trim();
+        if (name) lines.push('Name: ' + name);
       }
+    }
 
-      // Email (exclude chat area)
-      if (!lines.some(l => l.startsWith('Email:')) && text.match(/^[\w.+-]+@[\w.-]+\.\w{2,}$/) && !el.closest('[class*="chat-message"]')) {
-        lines.push('Email: ' + text);
+    // Email - via aria-label "Copy email"
+    const emailBtn = document.querySelector('button[aria-label="Copy email"]');
+    if (emailBtn) {
+      const emailDiv = emailBtn.closest('.grid')?.querySelector('.overflow-auto.break-words');
+      if (emailDiv) {
+        const email = emailDiv.textContent.trim();
+        if (email) lines.push('Email: ' + email);
       }
+    }
 
-      // Plan
-      if (!lines.some(l => l.startsWith('Plan:'))) {
-        const planMatch = text.match(/^(Starter|Basic|Grow|Advanced|Plus|Retail|Agentic|Lite)\s*\([^)]*\)$/i);
-        if (planMatch) lines.push('Plan: ' + text);
+    // Store URL - via aria-label "Copy store link"
+    const storeBtn = document.querySelector('button[aria-label="Copy store link"]');
+    if (storeBtn) {
+      const storeDiv = storeBtn.closest('.grid')?.querySelector('.overflow-auto.break-words');
+      if (storeDiv) {
+        const storeLink = storeDiv.querySelector('a');
+        const storeText = storeLink ? storeLink.textContent.trim() : storeDiv.textContent.trim();
+        if (storeText) {
+          lines.push('Store: ' + storeText);
+          const handleMatch = storeText.match(/([\w-]+)\.myshopify\.com/);
+          if (handleMatch) storeHandle = handleMatch[1];
+        }
       }
+    }
 
-      // Location - "City, Country" pattern
-      if (!lines.some(l => l.startsWith('Location:')) && text.match(/^[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\s*,\s*[A-Z][a-z]+(?:\s[A-Z][a-z]+)*$/) && text.length < 60) {
-        lines.push('Location: ' + text);
+    // Details from information-item elements (Plan, Location, Permissions, Design Time)
+    const infoItems = document.querySelectorAll('[data-testid="information-item"]');
+    const infoLabels = ['Plan', 'Location', 'Permissions', 'Design Time'];
+    infoItems.forEach((item, index) => {
+      const textEl = item.querySelector('[data-testid="text-component"]');
+      if (textEl && index < infoLabels.length) {
+        const text = textEl.textContent.trim();
+        if (text) lines.push(infoLabels[index] + ': ' + text);
       }
+    });
 
-      // Account role
-      if (!lines.some(l => l.startsWith('Role:')) && text.match(/^(Account owner|Staff member|Collaborator)$/i)) {
-        lines.push('Role: ' + text);
-      }
+    // Build links from store handle
+    if (storeHandle) {
+      lines.push('Storefront: https://' + storeHandle + '.myshopify.com/');
+      lines.push('Admin: https://admin.shopify.com/store/' + storeHandle);
 
-      // Design time
-      if (!lines.some(l => l.startsWith('Design Time'))) {
-        const dtMatch = text.match(/(\d+)\s*minutes?\s*of\s*design\s*time\s*used/i);
-        if (dtMatch) lines.push('Design Time Used: ' + dtMatch[1] + ' minutes');
-      }
-
-      // Topic
-      if (!lines.some(l => l.startsWith('Topic:')) && text.match(/^Themes\s*[-–]\s*.+/i)) {
-        lines.push('Topic: ' + text);
+      // Try to find internal shop ID from the page
+      const html = document.body.innerHTML;
+      const internalMatch = html.match(/services\/internal\/shops\/(\d+)/);
+      if (internalMatch) {
+        lines.push('Internal: https://app.shopify.com/services/internal/shops/' + internalMatch[1]);
       }
     }
 
     return lines.length > 0 ? lines.join('\n') : null;
   }
 
-  // --- Chat Message Extraction ---
+  // --- Details Section Extraction (Topic, Merchant issue, Troubleshooting) ---
 
-  function extractChat() {
-    const container = document.querySelector('.py-5.px-4.overflow-auto.w-full.h-full');
-    if (!container) return null;
-
-    const msgs = container.querySelectorAll('[class*="chat-message"]');
-    if (!msgs.length) return null;
-
+  function extractDetails() {
     const lines = [];
+    const form = document.querySelector('#account-info-form');
+    if (!form) return null;
 
-    // Skip index 0 - aggregate blob
-    for (let i = 1; i < msgs.length; i++) {
-      const m = msgs[i];
+    const detailsSection = form.querySelector('.mt-4.pt-4');
+    if (!detailsSection) return null;
 
-      // Determine role
-      let role = 'SYSTEM';
-      if (m.classList.contains('self-end')) role = 'ADVISOR';
-      if (m.classList.contains('self-start')) role = 'MERCHANT';
+    const allEls = detailsSection.querySelectorAll('*:not(:has(*))');
+    let currentLabel = '';
 
-      // Sender name
-      const senderEl = m.querySelector('[class*="space-x-3"]');
-      let sender = '';
-      if (senderEl) {
-        const raw = senderEl.textContent.trim();
-        sender = raw.split(/\d/)[0].trim();
+    for (const el of allEls) {
+      const text = el.textContent.trim();
+      if (!text) continue;
+
+      if (text === 'Topic' || text === 'Merchant issue' || text === 'Troubleshooting steps completed') {
+        currentLabel = text;
+        continue;
       }
 
-      // Timestamp
-      let time = '';
-      if (senderEl) {
-        const match = senderEl.textContent.match(/\d{1,2}:\d{2}\s*(?:AM|PM)?/i);
-        if (match) time = match[0].trim();
+      if (currentLabel && text.length > 2) {
+        if (text.match(/^(Details|Ticket history)$/)) continue;
+        lines.push(currentLabel + ': ' + text);
+        currentLabel = '';
       }
-
-      // Message body
-      const bodyEls = m.querySelectorAll('[class*="py-\\[2px\\]"]');
-      let body = '';
-      if (bodyEls.length) {
-        const parts = [];
-        bodyEls.forEach((b) => {
-          let text = b.textContent.trim();
-          text = text.replace(/See (original|translation) \([^)]+\)/g, '').trim();
-          if (text) parts.push(text);
-        });
-        body = parts.join('\n');
-      } else {
-        body = m.textContent.trim().substring(0, 500);
-      }
-
-      // Strip delivery status
-      body = body.replace(/\bDelivered\b/g, '').trim();
-
-      if (!body) continue;
-
-      // Format line
-      const header = [role, sender, time].filter(Boolean).join(' | ');
-      lines.push('[' + header + ']\n' + body);
     }
 
-    return lines.join('\n\n');
+    return lines.length > 0 ? lines.join('\n') : null;
+  }
+
+  // --- Chat Extraction (all panels - merchant + internal) ---
+
+  function extractMessages(list) {
+    return [...list.querySelectorAll('[data-testid="message-container"]')].map(el => {
+      const isAdvisor = el.classList.contains('prose-advisor-link');
+      const fullText = el.innerText.trim();
+
+      // Parse timestamp - handles "HH:MM AM/PM" and "DD/MM/YYYY, HH:MM:SS AM" formats
+      const timeMatch = fullText.match(/(\d{1,2}\/\d{1,2}\/\d{4},?\s*\d{1,2}:\d{2}(?::\d{2})?\s*[AP]M|\d{1,2}:\d{2}\s*[AP]M)/i);
+
+      let sender = '';
+      let time = '';
+      let message = '';
+
+      if (timeMatch) {
+        const idx = fullText.indexOf(timeMatch[0]);
+        sender = fullText.slice(0, idx).trim();
+        time = timeMatch[0].trim();
+        message = fullText.slice(idx + timeMatch[0].length).trim();
+      } else {
+        // Fallback: get message from bubble
+        message = el.querySelector('[class*="message-bubble"]')?.innerText.trim() ?? fullText;
+        // Try to get sender and time from header elements
+        const senderEl = el.querySelector('[data-testid="text-component"].font-semibold');
+        if (senderEl) sender = senderEl.textContent.trim();
+        const timeEl = el.querySelector('[data-testid="text-component"].font-normal');
+        if (timeEl) time = timeEl.textContent.trim();
+      }
+
+      // Clean up message
+      message = message.replace(/See (original|translation) \([^)]+\)/g, '').trim();
+      message = message.replace(/\bDelivered\b/g, '').trim();
+
+      return { isAdvisor, sender, time, message };
+    }).filter(x => x.message);
+  }
+
+  function extractAllChats() {
+    const lists = [...document.querySelectorAll('[data-testid="ChatMessageList"]')];
+    if (!lists.length) {
+      // Fallback to SidekickMessageList if ChatMessageList not found
+      const fallback = document.querySelector('[data-testid="SidekickMessageList"]');
+      if (fallback) lists.push(fallback);
+    }
+    if (!lists.length) return null;
+
+    const sections = lists.map(list => {
+      // Determine if this is the internal (DSA ↔ Advisor) panel or merchant chat
+      const parentClasses = list.parentElement?.className || '';
+      const isInternal = parentClasses.includes('justify-end') ||
+                         list.closest('[class*="consulting"]') !== null;
+
+      return {
+        label: isInternal ? 'INTERNAL (Advisor ↔ Specialist)' : 'MERCHANT CHAT',
+        messages: extractMessages(list),
+        isInternal
+      };
+    }).filter(s => s.messages.length > 0)
+      .sort((a, b) => a.isInternal ? 1 : -1); // Merchant chat first
+
+    if (!sections.length) return null;
+
+    const parts = sections.map(({ label, messages, isInternal }) => {
+      const formatted = messages.map(m => {
+        let role;
+        if (isInternal) {
+          role = m.sender; // In internal chat, just use the name
+        } else {
+          role = m.isAdvisor ? 'ADVISOR' : 'MERCHANT';
+        }
+        const header = [role, m.sender, m.time].filter(Boolean);
+        // Avoid duplicate name if role === sender
+        if (isInternal) {
+          return `[${m.time}] ${m.sender}:\n${m.message}`;
+        }
+        return `[${role} | ${m.sender} | ${m.time}]\n${m.message}`;
+      }).join('\n\n');
+
+      return `=== ${label} ===\n\n${formatted}`;
+    });
+
+    if (lists.length === 1) {
+      parts.push('\nNOTE: Only merchant chat captured. Open internal panel for specialist notes.');
+    }
+
+    return parts.join('\n\n');
   }
 
   // --- Build Full Output ---
 
   function buildTranscript() {
-    const storeInfo = extractStoreInfo();
-    const chat = extractChat();
+    const accountTab = document.querySelector('button[data-component-extra-event-name="beacon_chat_account_tab"]');
+    const monitorTab = document.querySelector('button[data-component-extra-event-name="beacon_chat_monitor_chat_tab"]');
 
-    if (!storeInfo && !chat) return null;
+    // Check if account tab content is already in the DOM
+    const hasAccountData = document.querySelector('button[aria-label="Copy name"]');
 
-    const parts = [];
-    if (storeInfo) {
-      parts.push('--- STORE INFO ---\n' + storeInfo);
+    if (!hasAccountData && accountTab) {
+      // Account tab not loaded - click to load, extract, then switch back
+      accountTab.click();
+
+      setTimeout(() => {
+        const result = doBuildTranscript();
+        if (monitorTab) monitorTab.click();
+        copyAndFlash(result);
+      }, 300);
+      return '__DEFERRED__';
+    }
+
+    return doBuildTranscript();
+  }
+
+  function doBuildTranscript() {
+    const accountInfo = extractAccountInfo();
+    const details = extractDetails();
+    const chat = extractAllChats();
+
+    if (!accountInfo && !details && !chat) return null;
+
+    const header = [
+      '== BEACON CHAT TRANSCRIPT ==',
+      'URL: ' + location.href,
+      'Captured: ' + new Date().toLocaleString(),
+    ].join('\n');
+
+    const parts = [header, ''];
+    if (accountInfo) {
+      parts.push('--- ACCOUNT INFO ---\n' + accountInfo);
+    }
+    if (details) {
+      parts.push('--- DETAILS ---\n' + details);
     }
     if (chat) {
-      parts.push('--- CHAT TRANSCRIPT ---\n' + chat);
+      parts.push(chat);
     }
     return parts.join('\n\n');
+  }
+
+  // --- Copy and visual feedback ---
+
+  function copyAndFlash(transcript) {
+    if (!transcript) {
+      btn.textContent = 'No chat found';
+      btn.style.background = '#8b0000';
+      setTimeout(() => {
+        btn.textContent = 'Copy Chat';
+        btn.style.background = '#2563eb';
+      }, 2000);
+      return;
+    }
+
+    if (typeof GM_setClipboard === 'function') {
+      GM_setClipboard(transcript, 'text');
+    } else {
+      navigator.clipboard.writeText(transcript).catch(() => {
+        // Fallback: open in new window
+        const w = window.open();
+        w.document.write('<pre style="white-space:pre-wrap">' + transcript + '</pre>');
+      });
+    }
+
+    btn.textContent = 'Copied!';
+    btn.style.background = '#1a6b3c';
+    setTimeout(() => {
+      btn.textContent = 'Copy Chat';
+      btn.style.background = '#2563eb';
+    }, 1500);
   }
 
   // --- Click handler ---
 
   btn.addEventListener('click', () => {
     const transcript = buildTranscript();
-
-    if (!transcript) {
-      btn.textContent = 'No chat found';
-      btn.style.background = '#8b0000';
-      setTimeout(() => {
-        btn.textContent = 'Copy Chat';
-        btn.style.background = '#1a1a1a';
-      }, 2000);
-      return;
-    }
-
-    // Copy to clipboard
-    if (typeof GM_setClipboard === 'function') {
-      GM_setClipboard(transcript, 'text');
-    } else {
-      navigator.clipboard.writeText(transcript).catch(() => {});
-    }
-
-    // Visual feedback
-    btn.textContent = 'Copied!';
-    btn.style.background = '#1a6b3c';
-    setTimeout(() => {
-      btn.textContent = 'Copy Chat';
-      btn.style.background = '#1a1a1a';
-    }, 1500);
+    if (transcript === '__DEFERRED__') return;
+    copyAndFlash(transcript);
   });
 })();
