@@ -30,12 +30,17 @@ Handle all post-email tasks for closing out a ticket: generate the internal note
    - Use the appropriate template below
    - Keep detail proportional to the ticket's complexity
 
-3. **Update Impact Tracker**
+3. **Update Impact Tracker (MANDATORY: CHECK DOC FIRST)**
    - Document: "2026 Q4 Impact Tracker - Personal"
    - Document ID: 1jVRYIeDQr4I2sT5ICZJMZijXDFaTFfKbLwhETiUs-x8
-   - First touch: append to end of doc using `gws_docs_write`
-   - Follow-up: use `gws_docs_read` to find the existing entry by matching the Zendesk ticket number, then use `gws_docs_replace` to insert the update directly below that ticket's entry (before the next ticket's date separator). Always verify you're targeting the correct ticket - do NOT just append to the end of the doc.
-   - Use the appropriate template below (First Touch or Follow-up Update)
+   
+   **Step 3a: ALWAYS read the doc first.** Use `gws_docs_read` to search for the Zendesk ticket number in the document. This step is NEVER optional - do NOT skip it even if you believe this is a first touch, even if this is a new Pi session, even if the close-ticket skill is being invoked for the first time on this ticket. The doc is the source of truth, not your session context.
+   
+   **Step 3b: Check if the ticket number exists in the doc.**
+   - **If the ticket number IS found:** This is a follow-up. Use `gws_docs_replace` to insert the update directly below the existing entry (before the next ticket's date separator). NEVER create a second entry for the same ticket number.
+   - **If the ticket number is NOT found:** This is a first touch. Append a new entry to the end of the doc using `gws_docs_write`.
+   
+   **Step 3c: Write the appropriate content** using the templates below (First Touch or Follow-up Update).
 
 4. **Confirm Completion**
    - Briefly confirm both tasks are done
