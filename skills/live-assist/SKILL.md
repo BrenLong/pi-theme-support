@@ -20,9 +20,13 @@ Analyse a Live Assist (Beacon) chat transcript and provide real-time troubleshoo
 
 ### 1. Analyse the Chat Transcript + Provide Holding Message
 
-When Brendan pastes a transcript, IMMEDIATELY produce two things before any investigation:
+When Brendan pastes a transcript, IMMEDIATELY produce two things before any investigation. The holding message is the TOP PRIORITY - create it FIRST, before the briefing.
 
-**A) Concise briefing** (output inline in Pi):
+**A) Holding message** (written to file FIRST - this is time-critical):
+
+Create and open the file immediately. Brendan needs to send this to the advisor within seconds.
+
+**B) Concise briefing** (output inline in Pi AFTER the holding message is delivered):
 
 **LIVE ASSIST BRIEFING**
 
@@ -35,7 +39,7 @@ When Brendan pastes a transcript, IMMEDIATELY produce two things before any inve
 - **Scope:** [In Scope / Out of Scope / Needs Investigation] with brief reasoning
 - **My take:** [Your quick assessment - what you think the issue is and suggested next steps]
 
-**B) Holding message** (written to file immediately alongside the briefing):
+**Holding message template:**
 
 This is a FIXED template - do NOT customise it, add issue details, or hint at what you're investigating. Advisors tend to jump the gun with partial information, so keep it generic. The only dynamic parts are the advisor's first name and the merchant's first name.
 
