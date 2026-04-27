@@ -12,7 +12,7 @@ Retrieve and analyze a Shopify Theme Support ticket to begin work.
 - Beginning work on a new support case
 
 ## Required MCPs
-- support-core (Zendesk access, Help Center)
+- Zendesk tools: `search_zendesk_tickets`, `search_zendesk_tickets_by_advisor` (via Tool Gateway)
 - scout (merchant frustrations)
 - vault-mcp (past tickets, team knowledge)
 - dev-mcp (known theme issues)
@@ -123,7 +123,7 @@ Theme: Dawn
 Issue: Product images not displaying in Featured Collection
 
 ## Notes
-- If ticket number provided, use support-core MCP to retrieve
+- If ticket number provided, use `search_zendesk_tickets` with the ticket number to retrieve
 - If pasted content, extract information from text
 - Always search for similar issues before concluding
 - Flag high-priority or time-sensitive tickets

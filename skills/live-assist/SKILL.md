@@ -213,7 +213,7 @@ NEVER guess or fabricate the internal link - always extract the shop ID from the
 - All other fields remain the same
 
 ## Required MCPs
-- support-core (Help Center, Zendesk)
+- Zendesk tools: `search_zendesk_tickets`, `search_zendesk_tickets_by_advisor`, `search_help_center` (via Tool Gateway)
 - dev-mcp (theme documentation, code validation)
 - scout (merchant frustrations, patterns)
 - vault-mcp (team knowledge)

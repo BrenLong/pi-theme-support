@@ -12,7 +12,7 @@ Generate a professional Theme Support email response following Brendan's templat
 - For both in-scope and out-of-scope issues
 
 ## Required MCPs
-- support-core (for Help Center article links)
+- `search_help_center` (for Help Center article links, via Tool Gateway)
 - None required (reads investigation context)
 
 ## Process
